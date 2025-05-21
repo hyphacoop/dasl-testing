@@ -1,0 +1,21 @@
+[
+  {
+    "type": "encode",
+    "input": "abc123",
+    "output": "123abc",
+    "reason": "blah blah",
+    "tags": ["dag-cbor", "spec-123"]
+  },
+  {
+    "type": "invalid",
+    "input": "abc123",
+    "reason": "foo bar",
+    "tags": ["womp"]
+  },
+  {
+    "type": "decode",
+    "input": "foobar",
+    "reason": "blah blah",
+    "tags": []
+  }
+]

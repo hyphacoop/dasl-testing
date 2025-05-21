@@ -1,0 +1,22 @@
+{
+  "example_tests.json": [
+    {
+      "pass": true
+    },
+    {
+      "pass": false,
+      "output": "foobar"
+    },
+    {
+      "pass": false,
+      "error": "unknown type barbaz"
+    },
+    {
+      "pass": true,
+      "error": "expected error goes here"
+    },
+    {
+      "pass": false
+    }
+  ]
+}
