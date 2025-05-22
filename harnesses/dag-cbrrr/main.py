@@ -38,19 +38,12 @@ def run_tests(tests):
     results = []
 
     for test in tests:
-        test_input = bytes()
-        test_output = bytes()
+        test_data = bytes.fromhex(test["data"])
 
-        if test.get("input"):
-            test_input = bytes.fromhex(test["input"])
-
-        if test.get("output"):
-            test_output = bytes.fromhex(test["output"])
-
-        if test["type"] == "encode":
+        if test["type"] == "roundtrip":
             try:
-                output = encode(test_input)
-                if test_output == output:
+                output = roundtrip(test_data)
+                if test_data == output:
                     # Encoding matches expected output
                     results.append({"pass": True})
                 else:
@@ -58,21 +51,23 @@ def run_tests(tests):
             except Exception as err:
                 results.append({"pass": False, "error": str(err)})
 
-        elif test["type"] == "decode":
-            try:
-                output = decode(test_input)
-                if test_input == output:
-                    # Decode and re-encode didn't change the input
-                    results.append({"pass": True})
-                else:
-                    results.append({"pass": False, "output": output.hex()})
-            except Exception as err:
-                results.append({"pass": False, "error": str(err)})
-
-        elif test["type"] == "invalid":
-            failed, info = is_invalid(test_input)
+        elif test["type"] == "invalid_in":
+            failed, info = invalid_decode(test_data)
             if failed:
                 # Failed to decode an invalid input, so the test passes
+                results.append(
+                    {
+                        "pass": True,
+                        "error": info,  # expected error
+                    }
+                )
+            else:
+                results.append({"pass": False})
+
+        elif test["type"] == "invalid_out":
+            failed, info = invalid_encode(test_data)
+            if failed:
+                # Failed to encode invalid data, so the test passes
                 results.append(
                     {
                         "pass": True,
@@ -88,19 +83,23 @@ def run_tests(tests):
     return results
 
 
-def encode(data):
-    obj = cbor2.loads(data)
-    return cbrrr.encode_dag_cbor(obj)
-
-
-def decode(data):
+def roundtrip(data):
     obj = cbrrr.decode_dag_cbor(data)
     return cbrrr.encode_dag_cbor(obj)
 
 
-def is_invalid(data):
+def invalid_decode(data):
     try:
         cbrrr.decode_dag_cbor(data)
+        return False, ""
+    except Exception as err:
+        return True, str(err)
+
+
+def invalid_encode(data):
+    obj = cbor2.loads(data)
+    try:
+        cbrrr.encode_dag_cbor(obj)
         return False, ""
     except Exception as err:
         return True, str(err)

@@ -1,13 +1,19 @@
 [
   {
-    "type": "decode",
-    "input": "a1616100",
+    "type": "roundtrip",
+    "data": "a1616100",
     "reason": "map with string key",
     "tags": ["dag-cbor"]
   },
   {
-    "type": "invalid",
-    "input": "a10000",
+    "type": "invalid_in",
+    "data": "a10000",
+    "reason": "map with int key",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "a10000",
     "reason": "map with int key",
     "tags": ["dag-cbor"]
   }

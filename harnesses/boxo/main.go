@@ -22,8 +22,7 @@ type testResult struct {
 
 type testCase struct {
 	Type   string
-	Input  string
-	Output string
+	Data   string
 	Reason string
 	Tags   []string
 }
@@ -62,32 +61,20 @@ func main() {
 func runTests(tests []*testCase) []*testResult {
 	results := make([]*testResult, len(tests))
 	for i, test := range tests {
-		var testInput []byte
-		var testOutput []byte
-		var err error
-
-		if test.Input != "" {
-			testInput, err = hex.DecodeString(test.Input)
-			if err != nil {
-				panic(fmt.Errorf("failed to decode hex: %s", test.Input))
-			}
-		}
-		if test.Output != "" {
-			testOutput, err = hex.DecodeString(test.Output)
-			if err != nil {
-				panic(fmt.Errorf("failed to decode hex: %s", test.Output))
-			}
+		testData, err := hex.DecodeString(test.Data)
+		if err != nil {
+			panic(fmt.Errorf("failed to decode hex: %s", test.Data))
 		}
 
 		switch test.Type {
-		case "encode":
-			output, err := encode(testInput)
+		case "roundtrip":
+			output, err := roundtrip(testData)
 			if err != nil {
 				results[i] = &testResult{
 					Pass:  false,
 					Error: err.Error(),
 				}
-			} else if bytes.Equal(testOutput, output) {
+			} else if bytes.Equal(testData, output) {
 				// Encoding matches expected output
 				results[i] = &testResult{Pass: true}
 			} else {
@@ -96,26 +83,23 @@ func runTests(tests []*testCase) []*testResult {
 					Output: hex.EncodeToString(output),
 				}
 			}
-		case "decode":
-			output, err := decode(testInput)
-			if err != nil {
-				results[i] = &testResult{
-					Pass:  false,
-					Error: err.Error(),
-				}
-			} else if bytes.Equal(testInput, output) {
-				// Decode and re-encode didn't change the input
-				results[i] = &testResult{Pass: true}
-			} else {
-				results[i] = &testResult{
-					Pass:   false,
-					Output: hex.EncodeToString(output),
-				}
-			}
-		case "invalid":
-			failed, info := isInvalid(testInput)
+		case "invalid_in":
+			failed, info := invalidDecode(testData)
 			if failed {
 				// Failed to decode an invalid input, so the test passes
+				results[i] = &testResult{
+					Pass:  true,
+					Error: info, // expected error
+				}
+			} else {
+				results[i] = &testResult{
+					Pass: false,
+				}
+			}
+		case "invalid_out":
+			failed, info := invalidEncode(testData)
+			if failed {
+				// Failed to encode invalid data, so the test passes
 				results[i] = &testResult{
 					Pass:  true,
 					Error: info, // expected error
@@ -132,7 +116,39 @@ func runTests(tests []*testCase) []*testResult {
 	return results
 }
 
-func encode(b []byte) ([]byte, error) {
+func roundtrip(b []byte) ([]byte, error) {
+	// Decode using library to test decoding ability
+	np := basicnode.Prototype.Any
+	nb := np.NewBuilder()
+	if err := dagcbor.Decode(nb, bytes.NewReader(b)); err != nil {
+		return nil, err
+	}
+	n := nb.Build()
+
+	// Re-encode and return to check nothing changed
+	var buf bytes.Buffer
+	if err := dagcbor.Encode(n, &buf); err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
+}
+
+// invalidDecode returns true if the provided CBOR is invalid.
+// The second return value is the error.
+func invalidDecode(b []byte) (bool, string) {
+	np := basicnode.Prototype.Any
+	nb := np.NewBuilder()
+	err := dagcbor.Decode(nb, bytes.NewReader(b))
+	if err == nil {
+		return false, ""
+	}
+	return true, err.Error()
+}
+
+// invalidEncode returns true if the provided CBOR cannot be encoded
+// after being decoded by a neutral decoder.
+// The second return value is the error.
+func invalidEncode(b []byte) (bool, string) {
 	// TODO: decode using general CBOR library
 	// This allows for only encoding to be tested rather than decode-strictness as well
 	//
@@ -151,32 +167,8 @@ func encode(b []byte) ([]byte, error) {
 	// in line with the dag-cbor spec.
 	// "DAG-CBOR decoders may relax strictness requirements by default"
 	// https://ipld.io/specs/codecs/dag-cbor/spec/#decode-strictness
-	return decode(b)
-}
 
-func decode(b []byte) ([]byte, error) {
-	// Decode using library to test decoding ability
-	np := basicnode.Prototype.Any
-	nb := np.NewBuilder()
-	if err := dagcbor.Decode(nb, bytes.NewReader(b)); err != nil {
-		return nil, err
-	}
-	n := nb.Build()
-
-	// Re-encode and return to check the decoding went okay
-	var buf bytes.Buffer
-	if err := dagcbor.Encode(n, &buf); err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
-}
-
-// isInvalid returns true if the provided CBOR is invalid.
-// The second argument is the error.
-func isInvalid(b []byte) (bool, string) {
-	np := basicnode.Prototype.Any
-	nb := np.NewBuilder()
-	err := dagcbor.Decode(nb, bytes.NewReader(b))
+	_, err := roundtrip(b)
 	if err == nil {
 		return false, ""
 	}

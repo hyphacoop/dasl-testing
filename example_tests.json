@@ -1,20 +1,19 @@
 [
   {
-    "type": "encode",
-    "input": "abc123",
-    "output": "123abc",
+    "type": "roundtrip",
+    "data": "abc123",
     "reason": "blah blah",
     "tags": ["dag-cbor", "spec-123"]
   },
   {
-    "type": "invalid",
-    "input": "abc123",
+    "type": "invalid_in",
+    "data": "abc123",
     "reason": "foo bar",
     "tags": ["womp"]
   },
   {
-    "type": "decode",
-    "input": "foobar",
+    "type": "invalid_out",
+    "data": "foobar",
     "reason": "blah blah",
     "tags": []
   }

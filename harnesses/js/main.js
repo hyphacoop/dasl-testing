@@ -3,15 +3,15 @@ import path from "path";
 import * as helia from "./helia.js";
 import * as atcute from "./atcute.js";
 
-let encode, decode, isInvalid;
+let roundtrip, invalidEncode, invalidDecode;
 if (process.argv[2] === "helia") {
-  encode = helia.encode;
-  decode = helia.decode;
-  isInvalid = helia.isInvalid;
+  roundtrip = helia.roundtrip;
+  invalidEncode = helia.invalidEncode;
+  invalidDecode = helia.invalidDecode;
 } else if (process.argv[2] === "atcute") {
-  encode = atcute.encode;
-  decode = atcute.decode;
-  isInvalid = atcute.isInvalid;
+  roundtrip = atcute.roundtrip;
+  invalidEncode = atcute.invalidEncode;
+  invalidDecode = atcute.invalidDecode;
 } else {
   throw new Error("provide argument (helia, atcute)");
 }
@@ -66,40 +66,18 @@ async function walkDir(dir) {
   return files;
 }
 
-/**
- * Run tests on a set of test cases
- * @param {TestCase[]} tests - Array of test cases
- * @returns {Promise<TestResult[]>} - Array of test results
- */
 async function runTests(tests) {
   const results = [];
 
   for (const test of tests) {
-    let testInput = Buffer.alloc(0);
-    let testOutput = Buffer.alloc(0);
-
-    if (test.input) {
-      try {
-        testInput = Buffer.from(test.input, "hex");
-      } catch (err) {
-        throw new Error(`Failed to decode hex: ${test.input}`);
-      }
-    }
-
-    if (test.output) {
-      try {
-        testOutput = Buffer.from(test.output, "hex");
-      } catch (err) {
-        throw new Error(`Failed to decode hex: ${test.output}`);
-      }
-    }
+    let testData = Buffer.from(test.data, "hex");
+    let failed, info;
 
     switch (test.type) {
-      case "encode":
+      case "roundtrip":
         try {
-          const output = await encode(testInput);
-
-          if (Buffer.compare(testOutput, output) === 0) {
+          const output = await roundtrip(testData);
+          if (Buffer.compare(testData, output) === 0) {
             // Encoding matches expected output
             results.push({ pass: true });
           } else {
@@ -116,31 +94,25 @@ async function runTests(tests) {
         }
         break;
 
-      case "decode":
-        try {
-          const output = await decode(testInput);
-
-          if (Buffer.compare(testInput, output) === 0) {
-            // Decode and re-encode didn't change the input
-            results.push({ pass: true });
-          } else {
-            results.push({
-              pass: false,
-              output: output.toString("hex"),
-            });
-          }
-        } catch (err) {
+      case "invalid_in":
+        [failed, info] = await invalidDecode(testData);
+        if (failed) {
+          // Failed to decode an invalid input, so the test passes
+          results.push({
+            pass: true,
+            error: info, // expected error
+          });
+        } else {
           results.push({
             pass: false,
-            error: err.message,
           });
         }
         break;
 
-      case "invalid":
-        const [failed, info] = await isInvalid(testInput);
+      case "invalid_out":
+        [failed, info] = await invalidEncode(testData);
         if (failed) {
-          // Failed to decode an invalid input, so the test passes
+          // Failed to encode invalid data, so the test passes
           results.push({
             pass: true,
             error: info, // expected error
