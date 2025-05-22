@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "@atcute/cbor": "^2.2.4",
     "@ipld/dag-cbor": "^9.2.3",
     "cbor": "^10.0.3"
   }

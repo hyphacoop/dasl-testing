@@ -1,7 +1,20 @@
 import fs from "fs";
 import path from "path";
-import * as dagcbor from "@ipld/dag-cbor";
-import cbor from "cbor";
+import * as helia from "./helia.js";
+import * as atcute from "./atcute.js";
+
+let encode, decode, isInvalid;
+if (process.argv[2] === "helia") {
+  encode = helia.encode;
+  decode = helia.decode;
+  isInvalid = helia.isInvalid;
+} else if (process.argv[2] === "atcute") {
+  encode = atcute.encode;
+  decode = atcute.decode;
+  isInvalid = atcute.isInvalid;
+} else {
+  throw new Error("provide argument (helia, atcute)");
+}
 
 async function main() {
   const results = {};
@@ -145,40 +158,6 @@ async function runTests(tests) {
   }
 
   return results;
-}
-
-/**
- * Encode data to CBOR format
- * @param {Buffer} data - Data to encode
- * @returns {Promise<Buffer>} - Encoded data
- */
-async function encode(data) {
-  const decoded = cbor.decodeFirstSync(data);
-  return dagcbor.encode(decoded);
-}
-
-/**
- * Decode CBOR data
- * @param {Buffer} data - CBOR data to decode
- * @returns {Promise<Buffer>} - Decoded data
- */
-async function decode(data) {
-  const decoded = dagcbor.decode(data);
-  return dagcbor.encode(decoded);
-}
-
-/**
- * Check if data is invalid CBOR
- * @param {Buffer} data - CBOR data to check
- * @returns {Promise<[boolean, string]>} - [failed, error info]
- */
-async function isInvalid(data) {
-  try {
-    dagcbor.decode(data);
-    return [false, ""];
-  } catch (err) {
-    return [true, err.message];
-  }
 }
 
 // Run the main function
