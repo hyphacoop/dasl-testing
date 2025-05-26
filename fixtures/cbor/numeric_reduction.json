@@ -1,0 +1,38 @@
+[
+  {
+    "type": "invalid_out",
+    "data": "f90000",
+    "reason": "0.0 could be reduced",
+    "tags": ["dCBOR"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f90000",
+    "reason": "0.0 could be reduced",
+    "tags": ["dCBOR"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "f98000",
+    "reason": "-0.0 could be reduced",
+    "tags": ["dCBOR"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f98000",
+    "reason": "-0.0 could be reduced",
+    "tags": ["dCBOR"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "a20a00f9490000",
+    "reason": "map with equal int and float keys",
+    "tags": ["dCBOR", "CBOR::Core"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "fbc3e0000000000001",
+    "reason": "too small for int reduction, <-(2^63)",
+    "tags": ["dCBOR"]
+  }
+]

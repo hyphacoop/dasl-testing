@@ -3,7 +3,7 @@
     "type": "roundtrip",
     "data": "a1616100",
     "reason": "map with string key",
-    "tags": ["dag-cbor"]
+    "tags": ["basic"]
   },
   {
     "type": "invalid_in",
@@ -16,5 +16,23 @@
     "data": "a10000",
     "reason": "map with int key",
     "tags": ["dag-cbor"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "a361610161620262616103",
+    "reason": "map keys in correct order",
+    "tags": ["rfc8949", "dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "a2616201616100",
+    "reason": "map keys in incorrect order",
+    "tags": ["rfc8949", "dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "a2616100616101",
+    "reason": "duplicate map keys",
+    "tags": ["basic", "dag-cbor", "dCBOR"]
   }
 ]

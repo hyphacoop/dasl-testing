@@ -1,0 +1,26 @@
+[
+  {
+    "type": "invalid_in",
+    "data": "f7",
+    "reason": "simple value 'undefined'",
+    "tags": ["dag-cbor", "dCBOR"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "f7",
+    "reason": "simple value 'undefined'",
+    "tags": ["dag-cbor", "dCBOR"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "e0",
+    "reason": "unassigned simple value",
+    "tags": ["dag-cbor", "dCBOR"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "f6",
+    "reason": "simple value 'null'",
+    "tags": ["basic"]
+  }
+]

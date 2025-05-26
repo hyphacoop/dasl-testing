@@ -1,8 +1,0 @@
-[
-  {
-    "type": "invalid_in",
-    "data": "b90001616100",
-    "reason": "unnecessary two-byte map definition",
-    "tags": ["rfc8949"]
-  }
-]

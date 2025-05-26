@@ -1,0 +1,27 @@
+[
+  {
+    "type": "invalid_in",
+    "data": "bfff",
+    "reason": "indefinite map",
+    "tags": ["rfc8949", "dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "9fff",
+    "reason": "indefinite array",
+
+    "tags": ["rfc8949", "dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "5fff",
+    "reason": "indefinite byte string",
+    "tags": ["rfc8949", "dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "7fff",
+    "reason": "indefinite string",
+    "tags": ["rfc8949", "dag-cbor"]
+  }
+]

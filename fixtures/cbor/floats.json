@@ -1,0 +1,134 @@
+[
+  {
+    "type": "roundtrip",
+    "data": "f93e00",
+    "reason": "float reduction",
+    "tags": ["rfc8949"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "fb3ff8000000000000",
+    "reason": "64-bit floats only",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f93e00",
+    "reason": "64-bit floats only",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "fb3ff8000000000000",
+    "reason": "float reduction",
+    "tags": ["rfc8949"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "f97e00",
+    "reason": "short NaN",
+    "tags": ["rfc8949", "CBOR::Core"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "fb7ff8000000000000",
+    "reason": "long NaN",
+    "tags": ["rfc8949", "dag-cbor"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "fb8000000000000000",
+    "reason": "negative zero float64",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "fb0000000000000000",
+    "reason": "zero float64",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "f90000",
+    "reason": "zero float16",
+    "tags": ["rfc8949", "CBOR::Core"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "fb0000000000000001",
+    "reason": "64-bit subnormal number",
+    "tags": ["basic"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f97e00",
+    "reason": "short NaN",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f97c00",
+    "reason": "short Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "fa7f800000",
+    "reason": "32-bit Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "fb7ff0000000000000",
+    "reason": "64-bit Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f9fc00",
+    "reason": "short -Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "faff800000",
+    "reason": "32-bit -Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "fbfff0000000000000",
+    "reason": "64-bit -Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "f97e00",
+    "reason": "NaN",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "f97c00",
+    "reason": "Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "f9fc00",
+    "reason": "-Inf",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f97e01",
+    "reason": "NaN with payload",
+    "tags": ["CBOR::Core"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "f97d00",
+    "reason": "signaling NaN",
+    "tags": ["dag-cbor"]
+  }
+]

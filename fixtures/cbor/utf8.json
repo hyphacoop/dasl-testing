@@ -1,0 +1,32 @@
+[
+  {
+    "type": "roundtrip",
+    "data": "7873d8a7d984d986d8b561f09f94a5f09f918bf09f8fbc5acda7cc91cc93cca4cd9461cc88cc88cc87cd96ccad6ccdaecc92cdab67cc8ccc9acc97cd9a6fcc94cdaecc87cd90cc87cc99f09fa79fe2808de29980efb88fe2808d20f09f8fb3efb88fe2808de29aa7efb88fe794b0e2808b20e2808b",
+    "reason": "complex UTF-8 string",
+    "tags": ["basic"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "630d0a09",
+    "reason": "commonly escaped characters",
+    "tags": ["basic"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "62c328",
+    "reason": "invalid UTF-8",
+    "tags": ["basic"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "6365cc81",
+    "reason": "text not in Unicode Normalization Form C",
+    "tags": ["dCBOR"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "6365cc81",
+    "reason": "text not in Unicode Normalization Form C",
+    "tags": ["dag-cbor", "CDE", "CBOR::Core"]
+  }
+]

@@ -76,7 +76,7 @@ async function runTests(tests) {
     switch (test.type) {
       case "roundtrip":
         try {
-          const output = await roundtrip(testData);
+          const output = Buffer.from(await roundtrip(testData));
           if (Buffer.compare(testData, output) === 0) {
             // Encoding matches expected output
             results.push({ pass: true });

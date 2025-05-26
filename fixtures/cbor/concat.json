@@ -1,0 +1,8 @@
+[
+  {
+    "type": "invalid_in",
+    "data": "0000",
+    "reason": "concatenated objects / CBOR sequence",
+    "tags": ["dag-cbor"]
+  }
+]

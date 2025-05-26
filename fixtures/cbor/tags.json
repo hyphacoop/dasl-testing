@@ -1,0 +1,20 @@
+[
+  {
+    "type": "invalid_in",
+    "data": "d8207368747470733a2f2f6578616d706c652e636f6d",
+    "reason": "tag that isn't 42",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "c07819323032352d30352d32365431363a31383a31372d30343a3030",
+    "reason": "tagged object (datetime)",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "invalid_out",
+    "data": "c249010000000000000000",
+    "reason": "bignum",
+    "tags": ["dag-cbor"]
+  }
+]
