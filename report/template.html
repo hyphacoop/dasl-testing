@@ -88,14 +88,14 @@
               <td>{{result.type}}</td>
               {% for cell in result.bools %} {% if cell %}
               <td
-                onclick="showModal({{ result.details[loop.index0] | tojson }})"
+                onclick='showModal({{ result.details[loop.index0] | tojson }})'
                 class="pass clickable-cell"
               >
                 PASS
               </td>
               {% else %}
               <td
-                onclick="showModal({{ result.details[loop.index0] | tojson }})"
+                onclick='showModal({{ result.details[loop.index0] | tojson }})'
                 class="fail clickable-cell"
               >
                 FAIL
