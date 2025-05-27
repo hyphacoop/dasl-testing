@@ -1,0 +1,7 @@
+[project]
+name = "report"
+version = "0.0.0"
+requires-python = ">=3.13"
+dependencies = [
+    "jinja2>=3.1.6",
+]

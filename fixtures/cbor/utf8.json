@@ -27,6 +27,6 @@
     "type": "roundtrip",
     "data": "6365cc81",
     "reason": "text not in Unicode Normalization Form C",
-    "tags": ["dag-cbor", "CDE", "CBOR::Core"]
+    "tags": ["dag-cbor", "CDE", "CBOR-Core"]
   }
 ]

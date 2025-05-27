@@ -27,7 +27,7 @@
     "type": "roundtrip",
     "data": "f97e00",
     "reason": "short NaN",
-    "tags": ["rfc8949", "CBOR::Core"]
+    "tags": ["rfc8949", "CBOR-Core"]
   },
   {
     "type": "invalid_in",
@@ -51,7 +51,7 @@
     "type": "roundtrip",
     "data": "f90000",
     "reason": "zero float16",
-    "tags": ["rfc8949", "CBOR::Core"]
+    "tags": ["rfc8949", "CBOR-Core"]
   },
   {
     "type": "roundtrip",
@@ -123,7 +123,7 @@
     "type": "invalid_in",
     "data": "f97e01",
     "reason": "NaN with payload",
-    "tags": ["CBOR::Core"]
+    "tags": ["CBOR-Core"]
   },
   {
     "type": "invalid_in",

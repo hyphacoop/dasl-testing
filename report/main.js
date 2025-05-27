@@ -1,0 +1,66 @@
+// Main filtering function
+function filterTableRows() {
+  const dropdown = document.getElementById("tagFilter");
+  const selectedValue = dropdown.value;
+
+  // Get all tables on the page
+  const tables = document.querySelectorAll("table");
+
+  tables.forEach((table) => {
+    // Get all tbody rows in this table
+    const rows = table.querySelectorAll("tbody tr");
+    let visibleRowCount = 0;
+
+    rows.forEach((row) => {
+      if (selectedValue === "all") {
+        // Show all rows
+        row.classList.remove("hidden");
+        visibleRowCount++;
+      } else {
+        // Hide row if it doesn't have the selected class
+        if (row.classList.contains(selectedValue)) {
+          row.classList.remove("hidden");
+          visibleRowCount++;
+        } else {
+          row.classList.add("hidden");
+        }
+      }
+    });
+
+    // Hide the entire table if no rows are visible
+    if (visibleRowCount === 0) {
+      table.parentElement.classList.add("hidden");
+    } else {
+      table.parentElement.classList.remove("hidden");
+    }
+  });
+}
+
+// Set up event listener when page loads
+document.addEventListener("DOMContentLoaded", function () {
+  const dropdown = document.getElementById("tagFilter");
+  dropdown.addEventListener("change", filterTableRows);
+
+  // Close modal when clicking outside of it
+  const modal = document.getElementById("modal");
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+});
+
+// Modal functions
+function showModal(obj) {
+  const modal = document.getElementById("modal");
+  const modalText = document.getElementById("modal-text");
+  modalText.textContent = JSON.stringify(obj, null, 2);
+  modal.style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+  document.body.style.overflow = "";
+}

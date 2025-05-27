@@ -45,6 +45,6 @@
     "type": "roundtrip",
     "data": "c249010000000000000000",
     "reason": "smallest unsigned bigint",
-    "tags": ["CBOR::Core"]
+    "tags": ["CBOR-Core"]
   }
 ]

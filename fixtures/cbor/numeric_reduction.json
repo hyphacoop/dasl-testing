@@ -1,20 +1,8 @@
 [
   {
-    "type": "invalid_out",
-    "data": "f90000",
-    "reason": "0.0 could be reduced",
-    "tags": ["dCBOR"]
-  },
-  {
     "type": "invalid_in",
     "data": "f90000",
     "reason": "0.0 could be reduced",
-    "tags": ["dCBOR"]
-  },
-  {
-    "type": "invalid_out",
-    "data": "f98000",
-    "reason": "-0.0 could be reduced",
     "tags": ["dCBOR"]
   },
   {
@@ -27,7 +15,7 @@
     "type": "roundtrip",
     "data": "a20a00f9490000",
     "reason": "map with equal int and float keys",
-    "tags": ["dCBOR", "CBOR::Core"]
+    "tags": ["dCBOR", "CBOR-Core"]
   },
   {
     "type": "roundtrip",
