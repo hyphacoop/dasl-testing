@@ -1,8 +1,8 @@
 import sys
 import json
 import os
+from datetime import datetime, timezone
 from collections import namedtuple
-
 import jinja2
 
 loader = jinja2.FileSystemLoader("./template.html")
@@ -37,8 +37,6 @@ for test_file in results[libs[0]].keys():
         )
     items.append({"name": test_file, "results": test_results})
 
-print(libs)
-print(items)
-
-with open("index.html", "w") as f:
-    f.write(template.render(libs=libs, items=items))
+with open("dist/index.html", "w") as f:
+    date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    f.write(template.render(libs=libs, items=items, date=date))
