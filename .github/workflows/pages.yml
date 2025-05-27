@@ -44,11 +44,6 @@ jobs:
         enable-cache: true
         working-directory: harnessess/dag-cbrrr
 
-    - name: Install jq
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y jq
-
     - name: Verify installations
       run: |
         echo "Go version: $(go version)"
@@ -56,6 +51,11 @@ jobs:
         echo "npm version: $(npm --version)"
         echo "uv version: $(uv --version)"
         echo "jq version: $(jq --version)"
+
+    - name: Install deps
+      run: |
+        cd harnesses/js
+        npm install
 
     - name: Run build script
       run: ./run.sh
