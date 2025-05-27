@@ -42,7 +42,7 @@ jobs:
       uses: astral-sh/setup-uv@v6
       with:
         enable-cache: true
-        working-directory: harnessess/dag-cbrrr
+        working-directory: harnesses/dag-cbrrr
 
     - name: Verify installations
       run: |
