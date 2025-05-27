@@ -1,0 +1,56 @@
+[
+  {
+    "type": "invalid_in",
+    "data": "d9002a582500015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
+    "reason": "long CID tag",
+    "tags": ["dag-cbor"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "d82a582500015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
+    "reason": "valid CID with short tag",
+    "tags": ["dag-cbor", "dasl-cid"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a4100",
+    "reason": "invalid CID",
+    "tags": ["basic"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a582300122022ad631c69ee983095b5b8acd029ff94aff1dc6c48837878589a92b90dfea317",
+    "reason": "CIDv0",
+    "tags": ["dasl-cid"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a582400015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be",
+    "reason": "invalid hash size",
+    "tags": ["basic"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "d82a58250001551e208e4c7c1b99dbfd50e7a95185fead5ee1448fa904a2fdd778eaf5f2dbfd629a99",
+    "reason": "Big DASL CID",
+    "tags": ["dasl-cid"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "d82a450001551200",
+    "reason": "empty CID",
+    "tags": ["basic", "dasl-cid"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a58250001701220e9822efc7c48027a5429fdbd988d02b2b8e4eaee8f62c32bd1021dcf922e05de",
+    "reason": "CIDv1 that isn't raw or cbor",
+    "tags": ["dasl-cid"]
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a58190001551114f572d396fae9206628714fb2ce00f72e94f2258f",
+    "reason": "disallowed hash type (SHA-1)",
+    "tags": ["dasl-cid"]
+  }
+]
