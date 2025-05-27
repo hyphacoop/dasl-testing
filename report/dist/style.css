@@ -1,3 +1,6 @@
+summary {
+  width: fit-content !important;
+}
 svg {
   height: 1em;
 }
@@ -16,7 +19,7 @@ th {
   margin: auto;
 }
 th:first-child {
-  width: 30ch;
+  width: 33ch;
 }
 th:nth-child(2) {
   width: 10ch;
