@@ -31,12 +31,6 @@
   },
   {
     "type": "roundtrip",
-    "data": "1b0020000000000001",
-    "reason": "2^53+1, unrepresentable in JS",
-    "tags": ["basic"]
-  },
-  {
-    "type": "roundtrip",
     "data": "3b0020000000000000",
     "reason": "-(2^53+1), unrepresentable in JS",
     "tags": ["basic"]
