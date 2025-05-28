@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha256-v0oiNSTkC3fDBL7GfhIiz1UfFIgM9Cxp3ARlWOEcB7E=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css" />
     <script src="./main.js"></script>
   </head>
@@ -33,6 +34,31 @@
           expected all tests would pass for a compliant library.
         </p>
       </details>
+      <div id="summary">
+        <h2>Summary</h2>
+        <h3>Basic</h3>
+        <div class="chart-group">
+          {% for lib, passfail in summary.Basic.items() %}
+          <div
+            class="chart-container"
+            data-lib="{{lib}}"
+            data-pass="{{passfail.pass}}"
+            data-fail="{{passfail.fail}}"
+          ></div>
+          {% endfor %}
+        </div>
+        <h3>dag-cbor</h3>
+        <div class="chart-group">
+          {% for lib, passfail in summary["dag-cbor"].items() %}
+          <div
+            class="chart-container"
+            data-lib="{{lib}}"
+            data-pass="{{passfail.pass}}"
+            data-fail="{{passfail.fail}}"
+          ></div>
+          {% endfor %}
+      </div>
+      <h2>Tests</h2>
       <div class="filter-container">
         <label for="tagFilter">Filter by tag:</label>
         <select id="tagFilter">
@@ -49,12 +75,12 @@
       </div>
       {% for item in items %}
       <div class="test-file">
-        <h2>
+        <h3>
           <a
             href="https://github.com/hyphacoop/dasl-testing/blob/main/fixtures/cbor/{{item.name}}"
             >{{item.name}}</a
           >
-        </h2>
+        </h3>
         <table>
           <thead>
             <tr>

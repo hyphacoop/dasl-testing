@@ -36,20 +36,6 @@ function filterTableRows() {
   });
 }
 
-// Set up event listener when page loads
-document.addEventListener("DOMContentLoaded", function () {
-  const dropdown = document.getElementById("tagFilter");
-  dropdown.addEventListener("change", filterTableRows);
-
-  // Close modal when clicking outside of it
-  const modal = document.getElementById("modal");
-  window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
-});
-
 // Modal functions
 function showModal(obj) {
   const modal = document.getElementById("modal");
@@ -64,3 +50,69 @@ function closeModal() {
   modal.style.display = "none";
   document.body.style.overflow = "";
 }
+
+// Charts
+function displayCharts() {
+  const charts = document.querySelectorAll(".chart-container");
+  charts.forEach((chart) => {
+    var myChart = echarts.init(chart);
+    var option;
+
+    option = {
+      tooltip: {
+        trigger: "item",
+      },
+      title: {
+        text: chart.dataset.lib,
+        textStyle: {
+          color: "#c2c7d0",
+        },
+      },
+      series: [
+        {
+          type: "pie",
+          radius: ["40%", "70%"],
+          avoidLabelOverlap: false,
+          label: {
+            show: false,
+            position: "center",
+          },
+          emphasis: {
+            label: {
+              show: false,
+              fontSize: 40,
+              fontWeight: "bold",
+            },
+          },
+          labelLine: {
+            show: false,
+          },
+          data: [
+            { value: Number(chart.dataset.pass), name: "Pass" },
+            { value: Number(chart.dataset.fail), name: "Fail" },
+          ],
+          color: ["#398712", "#D93526"],
+        },
+      ],
+    };
+
+    option && myChart.setOption(option);
+    window.addEventListener("resize", myChart.resize);
+  });
+}
+
+// Set up event listener when page loads
+document.addEventListener("DOMContentLoaded", function () {
+  displayCharts();
+
+  const dropdown = document.getElementById("tagFilter");
+  dropdown.addEventListener("change", filterTableRows);
+
+  // Close modal when clicking outside of it
+  const modal = document.getElementById("modal");
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+});

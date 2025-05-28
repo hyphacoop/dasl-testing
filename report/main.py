@@ -14,6 +14,10 @@ items = []  # {name: "file", "results": [Test, Test, ...], ...}
 TestResult = namedtuple(
     "TestResult", ["type", "data", "reason", "tags", "bools", "details"]
 )
+summary = {
+    "Basic": {},  # {"lib name": {"pass": 23, "fail": 5}}
+    "dag-cbor": {},
+}
 
 with open(sys.argv[1], "r") as f:
     results = json.load(f)
@@ -37,6 +41,26 @@ for test_file in results[libs[0]].keys():
         )
     items.append({"name": test_file, "results": test_results})
 
+# Gather summary information
+for lib in libs:
+    summary["Basic"][lib] = {"pass": 0, "fail": 0}
+    summary["dag-cbor"][lib] = {"pass": 0, "fail": 0}
+for item in items:
+    for result in item["results"]:
+        tags = result.tags.split(" ")
+        if "basic" in tags:
+            for i, b in enumerate(result.bools):
+                if b:
+                    summary["Basic"][libs[i]]["pass"] += 1
+                else:
+                    summary["Basic"][libs[i]]["fail"] += 1
+        if "dag-cbor" in tags:
+            for i, b in enumerate(result.bools):
+                if b:
+                    summary["dag-cbor"][libs[i]]["pass"] += 1
+                else:
+                    summary["dag-cbor"][libs[i]]["fail"] += 1
+
 with open("dist/index.html", "w") as f:
     date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-    f.write(template.render(libs=libs, items=items, date=date))
+    f.write(template.render(libs=libs, items=items, date=date, summary=summary))

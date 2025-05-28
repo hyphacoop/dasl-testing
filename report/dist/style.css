@@ -91,3 +91,12 @@ div.filter-container select {
 .clickable-cell {
   cursor: pointer;
 }
+
+.chart-container {
+  width: 200px;
+  height: 200px;
+}
+.chart-group {
+  display: flex;
+  flex-wrap: wrap;
+}
