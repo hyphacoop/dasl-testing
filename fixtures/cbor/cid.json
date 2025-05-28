@@ -9,7 +9,7 @@
     "type": "roundtrip",
     "data": "d82a582500015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
     "reason": "valid CID with short tag",
-    "tags": ["dag-cbor", "dasl-cid"]
+    "tags": ["dag-cbor", "dasl-cid", "c42"]
   },
   {
     "type": "invalid_in",

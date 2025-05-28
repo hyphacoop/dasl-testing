@@ -9,30 +9,30 @@
     "type": "invalid_in",
     "data": "a10000",
     "reason": "map with int key",
-    "tags": ["dag-cbor"]
+    "tags": ["dag-cbor", "c42"]
   },
   {
     "type": "invalid_out",
     "data": "a10000",
     "reason": "map with int key",
-    "tags": ["dag-cbor"]
+    "tags": ["dag-cbor", "c42"]
   },
   {
     "type": "roundtrip",
     "data": "a361610161620262616103",
     "reason": "map keys in correct order",
-    "tags": ["rfc8949", "dag-cbor"]
+    "tags": ["rfc8949", "dag-cbor", "c42"]
   },
   {
     "type": "invalid_in",
     "data": "a2616201616100",
     "reason": "map keys in incorrect order",
-    "tags": ["rfc8949", "dag-cbor"]
+    "tags": ["rfc8949", "dag-cbor", "c42"]
   },
   {
     "type": "invalid_in",
     "data": "a2616100616101",
     "reason": "duplicate map keys",
-    "tags": ["basic", "dag-cbor", "dCBOR"]
+    "tags": ["basic", "dag-cbor", "c42", "dCBOR"]
   }
 ]

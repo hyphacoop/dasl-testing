@@ -39,6 +39,12 @@
     "type": "roundtrip",
     "data": "c249010000000000000000",
     "reason": "smallest unsigned bigint",
-    "tags": ["CBOR-Core"]
+    "tags": ["CBOR-Core", "c42"]
+  },
+  {
+    "type": "roundtrip",
+    "data": "c349010000000000000000",
+    "reason": "highest negative bigint",
+    "tags": ["CBOR-Core", "c42"]
   }
 ]

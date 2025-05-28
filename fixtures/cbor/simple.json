@@ -3,19 +3,19 @@
     "type": "invalid_in",
     "data": "f7",
     "reason": "simple value 'undefined'",
-    "tags": ["dag-cbor", "dCBOR"]
+    "tags": ["dag-cbor", "c42", "dCBOR"]
   },
   {
     "type": "invalid_out",
     "data": "f7",
     "reason": "simple value 'undefined'",
-    "tags": ["dag-cbor", "dCBOR"]
+    "tags": ["dag-cbor", "c42", "dCBOR"]
   },
   {
     "type": "invalid_in",
     "data": "e0",
     "reason": "unassigned simple value",
-    "tags": ["dag-cbor", "dCBOR"]
+    "tags": ["dag-cbor", "c42", "dCBOR"]
   },
   {
     "type": "roundtrip",
