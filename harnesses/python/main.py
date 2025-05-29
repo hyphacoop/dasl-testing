@@ -3,8 +3,12 @@ import os
 import sys
 from pathlib import Path
 
-import cbor2
-import cbrrr
+if sys.argv[1] == "dag-cbrrr":
+    from dagcbrrr import roundtrip, invalid_decode, invalid_encode
+elif sys.argv[1] == "libipld":
+    from ipld import roundtrip, invalid_decode, invalid_encode
+else:
+    raise Exception("unknown library name")
 
 
 def main():
@@ -81,28 +85,6 @@ def run_tests(tests):
             raise ValueError(f"Unknown test type '{test['Type']}'")
 
     return results
-
-
-def roundtrip(data):
-    obj = cbrrr.decode_dag_cbor(data)
-    return cbrrr.encode_dag_cbor(obj)
-
-
-def invalid_decode(data):
-    try:
-        cbrrr.decode_dag_cbor(data)
-        return False, ""
-    except Exception as err:
-        return True, str(err)
-
-
-def invalid_encode(data):
-    obj = cbor2.loads(data)
-    try:
-        cbrrr.encode_dag_cbor(obj)
-        return False, ""
-    except Exception as err:
-        return True, str(err)
 
 
 if __name__ == "__main__":

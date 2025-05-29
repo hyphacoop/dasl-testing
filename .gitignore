@@ -1,4 +1,6 @@
 NOTES.md
-**/node_modules
+node_modules
 results.json
 report/dist/index.html
+__pycache__
+*.pyc

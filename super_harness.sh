@@ -9,17 +9,20 @@ cd ../js
 helia=$(node main.js helia)
 atcute=$(node main.js atcute)
 
-cd ../dag-cbrrr
-cbrrr=$(uv run main.py)
+cd ../python
+cbrrr=$(uv run main.py dag-cbrrr)
+libipld=$(uv run main.py libipld)
 
 jq -n \
   --argjson boxo "$boxo" \
   --argjson helia "$helia" \
   --argjson atcute "$atcute" \
   --argjson cbrrr "$cbrrr" \
+  --argjson libipld "$libipld" \
   '{
     "go-ipld-prime": $boxo,
     "js-dag-cbor": $helia,
     "atcute": $atcute,
-    "dag-cbrrr": $cbrrr
+    "dag-cbrrr": $cbrrr,
+    "libipld": $libipld
   }'
