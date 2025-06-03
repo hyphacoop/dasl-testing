@@ -2,49 +2,57 @@
   {
     "type": "roundtrip",
     "data": "1bffffffffffffffff",
-    "reason": "largest CBOR integer, 2^64-1",
-    "tags": ["basic"]
+    "name": "largest CBOR integer, 2^64-1",
+    "tags": ["basic"],
+    "desc": "the largest possible value for CBOR's positive integer type"
   },
   {
     "type": "roundtrip",
     "data": "3bffffffffffffffff",
-    "reason": "smallest CBOR integer, -(2^64)",
-    "tags": ["basic"]
+    "name": "smallest CBOR integer, -(2^64)",
+    "tags": ["basic"],
+    "desc": "the smallest possible value for CBOR's negative integer type"
   },
   {
     "type": "roundtrip",
     "data": "1b001fffffffffffff",
-    "reason": "max safe JS integer, 2^53-1",
-    "tags": ["basic"]
+    "name": "max safe JS integer, 2^53-1",
+    "tags": ["basic"],
+    "desc": "the largest integer considered safe for use in JavaScript"
   },
   {
     "type": "roundtrip",
     "data": "1b0020000000000001",
-    "reason": "2^53+1, unrepresentable in JS",
-    "tags": ["basic"]
+    "name": "2^53+1, unrepresentable in JS",
+    "tags": ["basic"],
+    "desc": "an integer that can't be represented in JavaScript (without BigInt)"
   },
   {
     "type": "roundtrip",
     "data": "3b001ffffffffffffe",
-    "reason": "min safe JS integer, -(2^53-1)",
-    "tags": ["basic"]
+    "name": "min safe JS integer, -(2^53-1)",
+    "tags": ["basic"],
+    "desc": "the smallest integer considered safe for use in JavaScript"
   },
   {
     "type": "roundtrip",
     "data": "3b0020000000000000",
-    "reason": "-(2^53+1), unrepresentable in JS",
-    "tags": ["basic"]
+    "name": "-(2^53+1), unrepresentable in JS",
+    "tags": ["basic"],
+    "desc": "a negative integer that can't be represented in JavaScript (without BigInt)"
   },
   {
     "type": "roundtrip",
     "data": "c249010000000000000000",
-    "reason": "smallest unsigned bigint",
-    "tags": ["CBOR-Core", "c42"]
+    "name": "smallest unsigned bigint",
+    "tags": ["CBOR-Core", "c42"],
+    "desc": "the smallest positive CBOR big integer value, valid in specs that support big integers"
   },
   {
     "type": "roundtrip",
     "data": "c349010000000000000000",
-    "reason": "highest negative bigint",
-    "tags": ["CBOR-Core", "c42"]
+    "name": "highest negative bigint",
+    "tags": ["CBOR-Core", "c42"],
+    "desc": "the largest negative CBOR big integer value, valid in specs that support big integers"
   }
 ]

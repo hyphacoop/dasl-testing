@@ -2,25 +2,29 @@
   {
     "type": "invalid_in",
     "data": "f90000",
-    "reason": "0.0 could be reduced",
-    "tags": ["dCBOR"]
+    "name": "0.0 could be reduced",
+    "tags": ["dCBOR"],
+    "desc": "0.0 could be reduced to an integer according to dCBOR"
   },
   {
     "type": "invalid_in",
     "data": "f98000",
-    "reason": "-0.0 could be reduced",
-    "tags": ["dCBOR"]
+    "name": "-0.0 could be reduced",
+    "tags": ["dCBOR"],
+    "desc": "-0.0 could be reduced to integer zero according to dCBOR"
   },
   {
     "type": "roundtrip",
     "data": "a20a00f9490000",
-    "reason": "map with equal int and float keys",
-    "tags": ["dCBOR", "CBOR-Core"]
+    "name": "map with equal int and float keys",
+    "tags": ["dCBOR", "CBOR-Core"],
+    "desc": "a map with integer and float keys that have equal value, and so the float should not be reduced to an integer"
   },
   {
     "type": "roundtrip",
     "data": "fbc3e0000000000001",
-    "reason": "too small for int reduction, <-(2^63)",
-    "tags": ["dCBOR"]
+    "name": "too small for int reduction, <-(2^63)",
+    "tags": ["dCBOR"],
+    "desc": "a floating point value too small to be stored in a CBOR integer should not be reduced according to dCBOR"
   }
 ]

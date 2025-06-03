@@ -2,133 +2,155 @@
   {
     "type": "roundtrip",
     "data": "f93e00",
-    "reason": "float reduction",
-    "tags": ["rfc8949"]
+    "name": "float reduction",
+    "tags": ["rfc8949"],
+    "desc": "a 16-bit float, a valid representation according to RFC 8949"
   },
   {
     "type": "roundtrip",
     "data": "fb3ff8000000000000",
-    "reason": "64-bit floats only",
-    "tags": ["dag-cbor", "c42"]
+    "name": "64-bit floats only",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "a 64-bit float, the only valid float representation for dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "f93e00",
-    "reason": "64-bit floats only",
-    "tags": ["dag-cbor", "c42"]
+    "name": "64-bit floats only",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "a 16-bit float, an invalid input for dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "fb3ff8000000000000",
-    "reason": "float reduction",
-    "tags": ["rfc8949"]
+    "name": "float reduction",
+    "tags": ["rfc8949"],
+    "desc": "a 64-bit float that could be reduced, invalid for RFC 8949"
   },
   {
     "type": "roundtrip",
     "data": "f97e00",
-    "reason": "short NaN",
-    "tags": ["rfc8949", "CBOR-Core"]
+    "name": "short NaN",
+    "tags": ["rfc8949", "CBOR-Core"],
+    "desc": "the only valid NaN representation for RFC 8949"
   },
   {
     "type": "invalid_in",
     "data": "fb7ff8000000000000",
-    "reason": "long NaN",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "long NaN",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an invalid NaN representation, too long (RFC 8949) or because NaNs are invalid (dag-cbor)"
   },
   {
     "type": "roundtrip",
     "data": "fb8000000000000000",
-    "reason": "negative zero float64",
-    "tags": ["dag-cbor", "c42"]
+    "name": "negative zero float64",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "testing that negative zero can be roundtripped without becoming positive or an integer"
   },
   {
     "type": "roundtrip",
     "data": "fb0000000000000000",
-    "reason": "zero float64",
-    "tags": ["dag-cbor", "c42"]
+    "name": "zero float64",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "a standard float like 0.0 shouldn't become an integer"
   },
   {
     "type": "roundtrip",
     "data": "f90000",
-    "reason": "zero float16",
-    "tags": ["rfc8949", "CBOR-Core"]
+    "name": "zero float16",
+    "tags": ["rfc8949", "CBOR-Core"],
+    "desc": "0.0 as a 16-bit float is valid and required for RFC 8949"
   },
   {
     "type": "roundtrip",
     "data": "fb0000000000000001",
-    "reason": "64-bit subnormal number",
-    "tags": ["basic"]
+    "name": "64-bit subnormal number",
+    "tags": ["basic"],
+    "desc": "subnormal numbers are reduced to zero in some floating point implementations, but should not be here"
   },
   {
     "type": "invalid_in",
     "data": "f97e00",
-    "reason": "short NaN",
-    "tags": ["dag-cbor", "c42"]
+    "name": "short NaN",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "even short representations of NaN are invalid for dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "f97c00",
-    "reason": "short Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "short Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "fa7f800000",
-    "reason": "32-bit Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "32-bit Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "fb7ff0000000000000",
-    "reason": "64-bit Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "64-bit Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "f9fc00",
-    "reason": "short -Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "short -Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "negative infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "faff800000",
-    "reason": "32-bit -Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "32-bit -Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "negative infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "fbfff0000000000000",
-    "reason": "64-bit -Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "64-bit -Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "negative infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "f97e00",
-    "reason": "NaN",
-    "tags": ["dag-cbor", "c42"]
+    "name": "NaN",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "NaN should not be encoded for dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "f97c00",
-    "reason": "Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "infinity should not be encoded for dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "f9fc00",
-    "reason": "-Inf",
-    "tags": ["dag-cbor", "c42"]
+    "name": "-Inf",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "negative infinity should not be encoded for dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "f97e01",
-    "reason": "NaN with payload",
-    "tags": ["CBOR-Core"]
+    "name": "NaN with payload",
+    "tags": ["CBOR-Core"],
+    "desc": "NaNs with payloads (set bits) are invalid in CBOR::Core"
   },
   {
     "type": "invalid_in",
     "data": "f97d00",
-    "reason": "signaling NaN",
-    "tags": ["dag-cbor", "c42"]
+    "name": "signaling NaN",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "signaling NaNs are invalid in dag-cbor (like other NaNs)"
   }
 ]

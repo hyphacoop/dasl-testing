@@ -2,37 +2,43 @@
   {
     "type": "roundtrip",
     "data": "a1616100",
-    "reason": "map with string key",
-    "tags": ["basic"]
+    "name": "map with string key",
+    "tags": ["basic"],
+    "desc": "a simple map valid by any spec"
   },
   {
     "type": "invalid_in",
     "data": "a10000",
-    "reason": "map with int key",
-    "tags": ["dag-cbor", "c42"]
+    "name": "map with int key",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "a map with an integer key, invalid to decode dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "a10000",
-    "reason": "map with int key",
-    "tags": ["dag-cbor", "c42"]
+    "name": "map with int key",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "a map with an integer key, invalid to encode dag-cbor"
   },
   {
     "type": "roundtrip",
     "data": "a361610161620262616103",
-    "reason": "map keys in correct order",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "map keys in correct order",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a map with string keys, sorted by their bytes, which also sorts them by length in CBOR"
   },
   {
     "type": "invalid_in",
     "data": "a2616201616100",
-    "reason": "map keys in incorrect order",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "map keys in incorrect order",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a map with string keys, not sorted by bytes/length"
   },
   {
     "type": "invalid_in",
     "data": "a2616100616101",
-    "reason": "duplicate map keys",
-    "tags": ["basic", "dag-cbor", "c42", "dCBOR"]
+    "name": "duplicate map keys",
+    "tags": ["basic", "dag-cbor", "c42", "dCBOR"],
+    "desc": "a map with duplicate string keys which is invalid by the CBOR spec"
   }
 ]

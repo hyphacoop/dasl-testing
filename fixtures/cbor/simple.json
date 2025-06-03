@@ -2,25 +2,29 @@
   {
     "type": "invalid_in",
     "data": "f7",
-    "reason": "simple value 'undefined'",
-    "tags": ["dag-cbor", "c42", "dCBOR"]
+    "name": "simple value 'undefined'",
+    "tags": ["dag-cbor", "c42", "dCBOR"],
+    "desc": "the CBOR value undefined is banned for decoding by some specs"
   },
   {
     "type": "invalid_out",
     "data": "f7",
-    "reason": "simple value 'undefined'",
-    "tags": ["dag-cbor", "c42", "dCBOR"]
+    "name": "simple value 'undefined'",
+    "tags": ["dag-cbor", "c42", "dCBOR"],
+    "desc": "the CBOR value undefined is banned for encoding by some specs"
   },
   {
     "type": "invalid_in",
     "data": "e0",
-    "reason": "unassigned simple value",
-    "tags": ["dag-cbor", "c42", "dCBOR"]
+    "name": "unassigned simple value",
+    "tags": ["dag-cbor", "c42", "dCBOR"],
+    "desc": "this simple value is unassigned by the spec and must be invalid"
   },
   {
     "type": "roundtrip",
     "data": "f6",
-    "reason": "simple value 'null'",
-    "tags": ["basic"]
+    "name": "simple value 'null'",
+    "tags": ["basic"],
+    "desc": "the null value should be supported by all implementations"
   }
 ]

@@ -6,13 +6,13 @@ from collections import namedtuple
 import jinja2
 
 loader = jinja2.FileSystemLoader("./template.html")
-env = jinja2.Environment(loader=loader)
+env = jinja2.Environment(loader=loader, autoescape=True)
 template = env.get_template("")
 
 libs = []  # "lib1", "lib2"
 items = []  # {name: "file", "results": [Test, Test, ...], ...}
 TestResult = namedtuple(
-    "TestResult", ["type", "data", "reason", "tags", "bools", "details"]
+    "TestResult", ["type", "data", "name", "tags", "desc", "bools", "details"]
 )
 summary = {
     "Basic": {},  # {"lib name": {"pass": 23, "fail": 5}}

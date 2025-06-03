@@ -2,31 +2,36 @@
   {
     "type": "roundtrip",
     "data": "7873d8a7d984d986d8b561f09f94a5f09f918bf09f8fbc5acda7cc91cc93cca4cd9461cc88cc88cc87cd96ccad6ccdaecc92cdab67cc8ccc9acc97cd9a6fcc94cdaecc87cd90cc87cc99f09fa79fe2808de29980efb88fe2808d20f09f8fb3efb88fe2808de29aa7efb88fe794b0e2808b20e2808b",
-    "reason": "complex UTF-8 string",
-    "tags": ["basic"]
+    "name": "complex UTF-8 string",
+    "tags": ["basic"],
+    "desc": "this string contains many different kinds of Unicode characters (English, Arabic, Chinese, emoji, etc) to ensure that implementations don't alter data or struggle with this"
   },
   {
     "type": "roundtrip",
     "data": "630d0a09",
-    "reason": "commonly escaped characters",
-    "tags": ["basic"]
+    "name": "commonly escaped characters",
+    "tags": ["basic"],
+    "desc": "commonly escaped characters like newlines or tabs are not escaped in CBOR"
   },
   {
     "type": "invalid_in",
     "data": "62c328",
-    "reason": "invalid UTF-8",
-    "tags": ["basic"]
+    "name": "invalid UTF-8",
+    "tags": ["basic"],
+    "desc": "CBOR strings are required to be valid UTF-8, this invalid string tests whether libraries check for this"
   },
   {
     "type": "invalid_in",
     "data": "6365cc81",
-    "reason": "text not in Unicode Normalization Form C",
-    "tags": ["dCBOR"]
+    "name": "text not in Unicode Normalization Form C",
+    "tags": ["dCBOR"],
+    "desc": "dCBOR requires strings be normalized into NFC form"
   },
   {
     "type": "roundtrip",
     "data": "6365cc81",
-    "reason": "text not in Unicode Normalization Form C",
-    "tags": ["dag-cbor", "CDE", "CBOR-Core", "c42"]
+    "name": "text not in Unicode Normalization Form C",
+    "tags": ["dag-cbor", "CDE", "CBOR-Core", "c42"],
+    "desc": "all specs except dCBOR don't mention Unicode normalization, so this test ensures that libraries don't alter strings for the purpose of normalization"
   }
 ]

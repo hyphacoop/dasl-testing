@@ -2,193 +2,225 @@
   {
     "type": "roundtrip",
     "data": "a1616100",
-    "reason": "one item map",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "one item map",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a valid, minimally encoded map with one item"
   },
   {
     "type": "invalid_in",
     "data": "b801616100",
-    "reason": "unnecessary one-byte map definition",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary one-byte map definition",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a map with a length needlessly encoded as separate byte"
   },
   {
     "type": "invalid_in",
     "data": "b90001616100",
-    "reason": "unnecessary two-byte map definition",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary two-byte map definition",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a map with a length needlessly encoded as two bytes"
   },
   {
     "type": "invalid_in",
     "data": "ba00000001616100",
-    "reason": "unnecessary four-byte map definition",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary four-byte map definition",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a map with a length needlessly encoded as four bytes"
   },
   {
     "type": "invalid_in",
     "data": "bb0000000000000001616100",
-    "reason": "unnecessary eight-byte map definition",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary eight-byte map definition",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a map with a length needlessly encoded as eight bytes"
   },
   {
     "type": "roundtrip",
     "data": "01",
-    "reason": "small unsigned integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "small unsigned integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a valid, minimally encoded unsigned integer"
   },
   {
     "type": "invalid_in",
     "data": "1801",
-    "reason": "unnecessary one-byte unsigned integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary one-byte unsigned integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an unsigned integer with a length needlessly encoded as separate byte"
   },
   {
     "type": "invalid_in",
     "data": "190001",
-    "reason": "unnecessary two-byte unsigned integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary two-byte unsigned integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an unsigned integer with a length needlessly encoded as two bytes"
   },
   {
     "type": "invalid_in",
     "data": "1a00000001",
-    "reason": "unnecessary four-byte unsigned integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary four-byte unsigned integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an unsigned integer with a length needlessly encoded as four bytes"
   },
   {
     "type": "invalid_in",
     "data": "1b0000000000000001",
-    "reason": "unnecessary eight-byte unsigned integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary eight-byte unsigned integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an unsigned integer with a length needlessly encoded as eight bytes"
   },
   {
     "type": "roundtrip",
     "data": "20",
-    "reason": "small negative integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "small negative integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a valid, minimally encoded negative integer"
   },
   {
     "type": "invalid_in",
     "data": "3800",
-    "reason": "unnecessary one-byte negative integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary one-byte negative integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a negative integer with a length needlessly encoded as separate byte"
   },
   {
     "type": "invalid_in",
     "data": "390000",
-    "reason": "unnecessary two-byte negative integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary two-byte negative integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a negative integer with a length needlessly encoded as two bytes"
   },
   {
     "type": "invalid_in",
     "data": "3a00000000",
-    "reason": "unnecessary four-byte negative integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary four-byte negative integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a negative integer with a length needlessly encoded as four bytes"
   },
   {
     "type": "invalid_in",
     "data": "3b0000000000000000",
-    "reason": "unnecessary eight-byte negative integer",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary eight-byte negative integer",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a negative integer with a length needlessly encoded as eight bytes"
   },
   {
     "type": "roundtrip",
     "data": "40",
-    "reason": "empty byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "empty byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a valid, minimally encoded empty byte string"
   },
   {
     "type": "invalid_in",
     "data": "5800",
-    "reason": "unnecessary one-byte byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary one-byte byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a byte string with a length needlessly encoded as separate byte"
   },
   {
     "type": "invalid_in",
     "data": "590000",
-    "reason": "unnecessary two-byte byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary two-byte byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a byte string with a length needlessly encoded as two bytes"
   },
   {
     "type": "invalid_in",
     "data": "5a00000000",
-    "reason": "unnecessary four-byte byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary four-byte byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a byte string with a length needlessly encoded as four bytes"
   },
   {
     "type": "invalid_in",
     "data": "5b0000000000000000",
-    "reason": "unnecessary eight-byte byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary eight-byte byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a byte string with a length needlessly encoded as eight bytes"
   },
   {
     "type": "roundtrip",
     "data": "60",
-    "reason": "empty string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "empty string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a valid, minimally encoded empty string"
   },
   {
     "type": "invalid_in",
     "data": "7800",
-    "reason": "unnecessary one-byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary one-byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a string with a length needlessly encoded as separate byte"
   },
   {
     "type": "invalid_in",
     "data": "790000",
-    "reason": "unnecessary two-byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary two-byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a string with a length needlessly encoded as two bytes"
   },
   {
     "type": "invalid_in",
     "data": "7a00000000",
-    "reason": "unnecessary four-byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary four-byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a string with a length needlessly encoded as four bytes"
   },
   {
     "type": "invalid_in",
     "data": "7b0000000000000000",
-    "reason": "unnecessary eight-byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary eight-byte string",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a string with a length needlessly encoded as eight bytes"
   },
   {
     "type": "roundtrip",
     "data": "80",
-    "reason": "empty array",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "empty array",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "a valid, minimally encoded empty map"
   },
   {
     "type": "invalid_in",
     "data": "9800",
-    "reason": "unnecessary one-byte array",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary one-byte array",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an array with a length needlessly encoded as separate byte"
   },
   {
     "type": "invalid_in",
     "data": "990000",
-    "reason": "unnecessary two-byte array",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary two-byte array",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an array with a length needlessly encoded as two bytes"
   },
   {
     "type": "invalid_in",
     "data": "9a00000000",
-    "reason": "unnecessary four-byte array",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary four-byte array",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an array with a length needlessly encoded as four bytes"
   },
   {
     "type": "invalid_in",
     "data": "9b0000000000000000",
-    "reason": "unnecessary eight-byte array",
-    "tags": ["rfc8949", "dag-cbor", "c42"]
+    "name": "unnecessary eight-byte array",
+    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "desc": "an array with a length needlessly encoded as eight bytes"
   },
   {
     "type": "invalid_in",
     "data": "c34a00010000000000000000",
-    "reason": "bigint with leading zero bytes",
-    "tags": ["rfc8949", "c42"]
+    "name": "bigint with leading zero bytes",
+    "tags": ["rfc8949", "c42"],
+    "desc": "a big integer encoded with unnecessary leading zeros"
   },
   {
     "type": "invalid_in",
     "data": "c243010000",
-    "reason": "value too small for bigint",
-    "tags": ["c42"]
+    "name": "value too small for bigint",
+    "tags": ["c42"],
+    "desc": "a big integer encoded with a value that could be a regular integer instead"
   }
 ]

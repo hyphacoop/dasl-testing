@@ -2,19 +2,22 @@
   {
     "type": "roundtrip",
     "data": "abc123",
-    "reason": "blah blah",
-    "tags": ["dag-cbor", "spec-123"]
+    "name": "blah blah",
+    "tags": ["dag-cbor", "spec-123"],
+    "desc": "longer explanation here"
   },
   {
     "type": "invalid_in",
     "data": "abc123",
-    "reason": "foo bar",
-    "tags": ["womp"]
+    "name": "foo bar",
+    "tags": ["womp"],
+    "desc": "longer explanation here"
   },
   {
     "type": "invalid_out",
     "data": "foobar",
-    "reason": "blah blah",
-    "tags": []
+    "name": "blah blah",
+    "tags": [],
+    "desc": "longer explanation here"
   }
 ]

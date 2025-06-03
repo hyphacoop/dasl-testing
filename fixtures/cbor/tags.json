@@ -2,19 +2,22 @@
   {
     "type": "invalid_in",
     "data": "d8207368747470733a2f2f6578616d706c652e636f6d",
-    "reason": "tag that isn't 42",
-    "tags": ["dag-cbor", "c42"]
+    "name": "tag that isn't 42",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "all tags other than 42 (CID) are banned by dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "c07819323032352d30352d32365431363a31383a31372d30343a3030",
-    "reason": "tagged object (datetime)",
-    "tags": ["dag-cbor", "c42"]
+    "name": "tagged object (datetime)",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "an object that could be encoded as a CBOR tag (a datetime in this case) should be rejected by dag-cbor encoders"
   },
   {
     "type": "invalid_out",
     "data": "c249010000000000000000",
-    "reason": "bignum",
-    "tags": ["dag-cbor"]
+    "name": "bignum",
+    "tags": ["dag-cbor"],
+    "desc": "big integers are banned for encoding by dag-cbor"
   }
 ]

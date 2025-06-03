@@ -2,7 +2,8 @@
   {
     "type": "invalid_in",
     "data": "0000",
-    "reason": "concatenated objects / CBOR sequence",
-    "tags": ["dag-cbor"]
+    "name": "concatenated objects / CBOR sequence",
+    "tags": ["dag-cbor"],
+    "desc": "a CBOR sequence of two zeros, invalid in the DAG-CBOR spec"
   }
 ]

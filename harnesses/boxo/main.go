@@ -21,10 +21,9 @@ type testResult struct {
 }
 
 type testCase struct {
-	Type   string
-	Data   string
-	Reason string
-	Tags   []string
+	Type string
+	Data string
+	Tags []string
 }
 
 func main() {
