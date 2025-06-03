@@ -10,24 +10,26 @@ td.pass {
 td.fail {
   background-color: var(--pico-color-red-500);
 }
-td,
-th {
+.test-file td,
+.test-file th {
   border: 2px solid var(--pico-table-border-color);
 }
 :where(table) {
   width: unset;
+}
+.test-file :where(table) {
   margin: auto;
 }
-th:first-child {
+.test-file th:first-child {
   width: 33ch;
 }
-th:nth-child(2) {
+.test-file th:nth-child(2) {
   width: 10ch;
 }
 td code {
   word-break: break-all;
 }
-thead {
+.test-file thead {
   position: sticky;
   top: 0;
   z-index: 999;

@@ -2,22 +2,32 @@ import fs from "fs";
 import path from "path";
 import * as helia from "./helia.js";
 import * as atcute from "./atcute.js";
+import heliaPkg from "./node_modules/@ipld/dag-cbor/package.json" with { type: "json" };
+import atcutePkg from "./node_modules/@atcute/cbor/package.json" with { type: "json" };
 
-let roundtrip, invalidEncode, invalidDecode;
+let roundtrip, invalidEncode, invalidDecode, link, version;
 if (process.argv[2] === "helia") {
   roundtrip = helia.roundtrip;
   invalidEncode = helia.invalidEncode;
   invalidDecode = helia.invalidDecode;
+  link = "https://github.com/ipld/js-dag-cbor";
+  version = heliaPkg.version;
 } else if (process.argv[2] === "atcute") {
   roundtrip = atcute.roundtrip;
   invalidEncode = atcute.invalidEncode;
   invalidDecode = atcute.invalidDecode;
+  link =
+    "https://github.com/mary-ext/atcute/tree/trunk/packages/utilities/cbor";
+  version = atcutePkg.version;
 } else {
   throw new Error("provide argument (helia, atcute)");
 }
 
 async function main() {
-  const results = {};
+  const results = {
+    metadata: { link, version },
+    files: {},
+  };
 
   try {
     const fixturesDir = "../../fixtures/cbor/";
@@ -28,7 +38,7 @@ async function main() {
 
       const data = await fs.promises.readFile(file, "utf8");
       const tests = JSON.parse(data);
-      results[path.basename(file)] = await runTests(tests);
+      results.files[path.basename(file)] = await runTests(tests);
     }
 
     process.stdout.write(JSON.stringify(results));

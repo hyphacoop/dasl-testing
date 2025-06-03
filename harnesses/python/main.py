@@ -2,17 +2,24 @@ import json
 import os
 import sys
 from pathlib import Path
+from importlib.metadata import version as pkg_version
 
 if sys.argv[1] == "dag-cbrrr":
     from dagcbrrr import roundtrip, invalid_decode, invalid_encode
+
+    link = "https://github.com/DavidBuchanan314/dag-cbrrr"
+    version = pkg_version("cbrrr")
 elif sys.argv[1] == "libipld":
     from ipld import roundtrip, invalid_decode, invalid_encode
+
+    link = "https://github.com/MarshalX/python-libipld"
+    version = pkg_version("libipld")
 else:
     raise Exception("unknown library name")
 
 
 def main():
-    results = {}
+    results = {"metadata": {"link": link, "version": version}, "files": {}}
 
     fixtures_dir = Path("../../fixtures/cbor/")
     for file_path in walk_dir(fixtures_dir):
@@ -21,7 +28,7 @@ def main():
         with open(file_path, "r", encoding="utf-8") as f:
             tests = json.load(f)
 
-        results[file_path.name] = run_tests(tests)
+        results["files"][file_path.name] = run_tests(tests)
 
     json.dump(results, sys.stdout, separators=(",", ":"))
 

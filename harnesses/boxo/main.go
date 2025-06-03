@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 
 	"github.com/ipld/go-ipld-prime/codec/dagcbor"
@@ -25,9 +26,22 @@ type testCase struct {
 	Data string
 	Tags []string
 }
+type metadata struct {
+	Link    string `json:"link"`
+	Version string `json:"version"`
+}
 
 func main() {
-	results := make(map[string][]*testResult)
+	results := struct {
+		Metadata metadata                 `json:"metadata"`
+		Files    map[string][]*testResult `json:"files"`
+	}{
+		Metadata: metadata{
+			Link:    "https://github.com/ipld/go-ipld-prime",
+			Version: getModuleVersion("github.com/ipld/go-ipld-prime"),
+		},
+		Files: make(map[string][]*testResult),
+	}
 	err := filepath.WalkDir("../../fixtures/cbor/", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -43,7 +57,7 @@ func main() {
 		if err := json.Unmarshal(b, &tests); err != nil {
 			return err
 		}
-		results[filepath.Base(path)] = runTests(tests)
+		results.Files[filepath.Base(path)] = runTests(tests)
 		return nil
 	})
 	if err != nil {
@@ -172,4 +186,25 @@ func invalidEncode(b []byte) (bool, string) {
 		return false, ""
 	}
 	return true, err.Error()
+}
+
+func getModuleVersion(path string) string {
+	bi, ok := debug.ReadBuildInfo()
+	if !ok {
+		// Build has no debug info
+		return ""
+	}
+	for _, dep := range bi.Deps {
+		if dep.Path != path {
+			continue
+		}
+		if dep.Replace != nil {
+			// Import has been replaced
+			// Assume the replace wasn't replaced also
+			return dep.Replace.Version
+		}
+		return dep.Version
+	}
+	// Dep doesn't exist
+	return ""
 }

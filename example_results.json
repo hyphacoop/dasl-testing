@@ -1,22 +1,28 @@
 {
-  "example_tests.json": [
-    {
-      "pass": true
-    },
-    {
-      "pass": false,
-      "output": "foobar"
-    },
-    {
-      "pass": false,
-      "error": "unknown type barbaz"
-    },
-    {
-      "pass": true,
-      "error": "expected error goes here"
-    },
-    {
-      "pass": false
-    }
-  ]
+  "metadata": {
+    "link": "https://github.com/foo/bar",
+    "version": "v1.2.3"
+  },
+  "files": {
+    "example_tests.json": [
+      {
+        "pass": true
+      },
+      {
+        "pass": false,
+        "output": "foobar"
+      },
+      {
+        "pass": false,
+        "error": "unknown type barbaz"
+      },
+      {
+        "pass": true,
+        "error": "expected error goes here"
+      },
+      {
+        "pass": false
+      }
+    ]
+  }
 }
