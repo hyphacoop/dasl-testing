@@ -12,7 +12,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha256-v0oiNSTkC3fDBL7GfhIiz1UfFIgM9Cxp3ARlWOEcB7E=" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"
+      integrity="sha256-v0oiNSTkC3fDBL7GfhIiz1UfFIgM9Cxp3ARlWOEcB7E="
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./style.css" />
     <script src="./main.js"></script>
   </head>
@@ -24,20 +28,24 @@
         <summary role="button" class="secondary">Explanation</summary>
         <p>
           This page holds the results of a test suite for the
-          <a href="https://dasl.ing">DASL</a> ecosystem and related specs.
-          It was created with funding from the
-          <a href="https://blog.ipfs.tech/2025-05-grants/">IPFS Implementation Grants</a>
+          <a href="https://dasl.ing">DASL</a> ecosystem and related specs. It
+          was created with funding from the
+          <a href="https://blog.ipfs.tech/2025-05-grants/"
+            >IPFS Implementation Grants</a
+          >
           program.
         </p>
         <p>
-          This test suite exists to survey the landscape of existing implementations.
-          By knowing how libraries handle IPFS specs like dag-cbor and CIDs today, the
-          DASL team can create better documents for the future.
+          This test suite exists to survey the landscape of existing
+          implementations. By knowing how libraries handle IPFS specs like
+          dag-cbor and CIDs today, the DASL team can create better documents for
+          the future.
         </p>
         <p>
-          Many different specifications are covered by these tests, so it's not expected
-          that all tests would pass for a compliant library. You can filter and group
-          tests below to only see ones that are relevant to you.
+          Many different specifications are covered by these tests, so it's not
+          expected that all tests would pass for a compliant library. You can
+          filter and group tests below to only see ones that are relevant to
+          you.
         </p>
         <p>Test types:</p>
         <ul>
@@ -71,97 +79,124 @@
             data-fail="{{passfail.fail}}"
           ></div>
           {% endfor %}
-      </div>
-      <div>
-        <h2>Libraries</h2>
-        <table>
-          {% for lib in libs %}
+        </div>
+        <div>
+          <h2>Libraries</h2>
+          <table>
+            {% for lib in libs %}
             <tr>
               <td><a href="{{lib.link}}">{{lib.name}}</a></td>
               <td>{{lib.version}}</td>
             </tr>
-          {% endfor %}
-        </table>
-      </div>
-      <h2>Tests</h2>
-      <div class="filter-container">
-        <label for="tagFilter">Filter by tag:</label>
-        <select id="tagFilter">
-          <option value="all">All tags</option>
-          <option value="basic">Basic functionality</option>
-          <option value="rfc8949">RFC 8949 §4.2</option>
-          <option value="dag-cbor">dag-cbor</option>
-          <option value="dasl-cid">DASL CID spec</option>
-          <option value="CBOR-Core">CBOR::Core</option>
-          <option value="dCBOR">dCBOR</option>
-          <option value="CDE">CDE</option>
-          <option value="c42">CBOR/c-42</option>
-        </select>
-      </div>
-      {% for item in items %}
-      <div class="test-file">
-        <h3>
-          <a
-            href="https://github.com/hyphacoop/dasl-testing/blob/main/fixtures/cbor/{{item.name}}"
-            >{{item.name}}</a
-          >
-        </h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Type</th>
-              {% for lib in libs %}
-              <th>{{lib.name}}</th>
-              {% endfor %}
-            </tr>
-          </thead>
-          <tbody>
-            {% for result in item.results %}
-            <tr class="{{result.tags}}">
-              <td>
-                <details>
-                  <summary>{{result.name}}</summary>
-                  <p>
-                    Data: <code>{{result.data}}</code>
-                    <a
-                      href="https://cbor.nemo157.com/#type=hex&value={{result.data}}"
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                      >
-                        <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                        <path
-                          d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
-                        /></svg></a
-                    ><br />
-                  </p>
-                  <p>Tags: {{result.tags | replace(" ", ", ") }}</p>
-                  <p>Description: {{result.desc}}</p>
-                </details>
-              </td>
-              <td>{{result.type}}</td>
-              {% for cell in result.bools %} {% if cell %}
-              <td
-                onclick='showModal({{ result.details[loop.index0] | tojson }})'
-                class="pass clickable-cell"
-              >
-                PASS
-              </td>
-              {% else %}
-              <td
-                onclick='showModal({{ result.details[loop.index0] | tojson }})'
-                class="fail clickable-cell"
-              >
-                FAIL
-              </td>
-              {% endif %} {% endfor %}
-            </tr>
             {% endfor %}
-          </tbody>
-        </table>
+          </table>
+        </div>
+        <h2>Tests</h2>
+        <div class="filter-container">
+          <label for="grouping">Group tests by:</label>
+          <select id="grouping">
+            <option value="tests-by-tag">Tag</option>
+            <option value="tests-by-file">File/Topic</option>
+          </select>
+          <br />
+          <div id="tagFilter-container">
+            <label for="tagFilter">Filter by tag:</label>
+            <select id="tagFilter">
+              <option value="all">All tags</option>
+              <option value="basic">Basic functionality</option>
+              <option value="rfc8949">RFC 8949 §4.2</option>
+              <option value="dag-cbor">dag-cbor</option>
+              <option value="dasl-cid">DASL CID spec</option>
+              <option value="CBOR-Core">CBOR::Core</option>
+              <option value="dCBOR">dCBOR</option>
+              <option value="CDE">CDE</option>
+              <option value="c42">CBOR/c-42</option>
+            </select>
+          </div>
+        </div>
+        {% for test_by, tests in tests_by.items() %}
+        <div id="tests-by-{{test_by}}" class="test-group-group">
+          {% for item in tests %}
+          <div class="test-group">
+            <h3>
+              {% if test_by == "file" %}
+              <a
+                href="https://github.com/hyphacoop/dasl-testing/blob/main/fixtures/cbor/{{item.name}}"
+                >{{item.name}}</a
+              >
+              {% endif %} {% if test_by == "tag" %} {{item.name}} {% endif %}
+            </h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Type</th>
+                  {% for lib in libs %}
+                  <th>{{lib.name}}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for result in item.results %}
+                <tr class="{{result.tags}}">
+                  <td>
+                    <details>
+                      <summary>{{result.name}}</summary>
+                      <p>
+                        Data: <code>{{result.data}}</code>
+                        <a
+                          href="https://cbor.nemo157.com/#type=hex&value={{result.data}}"
+                          ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                            <path
+                              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+                            /></svg></a
+                        ><br />
+                      </p>
+                      {% if test_by == "file" %}
+                      <p>Tags: {{result.tags | replace(" ", ", ") }}</p>
+                      {% endif %} {% if test_by == "tag" %}
+                      <p>
+                        File:
+                        <a
+                          href="https://github.com/hyphacoop/dasl-testing/blob/main/fixtures/cbor/{{result.file}}"
+                          >{{result.file}}</a
+                        >
+                      </p>
+                      {% endif %}
+                      <p>Description: {{result.desc}}</p>
+                    </details>
+                  </td>
+                  <td>{{result.type}}</td>
+                  {% for cell in result.bools %} {% if cell %}
+                  <!-- prettier-ignore -->
+                  <td
+                    onclick='showModal({{ result.details[loop.index0] | tojson }})'
+                    class="pass clickable-cell"
+                  >
+                    PASS
+                  </td>
+                  {% else %}
+                  <!-- prettier-ignore -->
+                  <td
+                    onclick='showModal({{ result.details[loop.index0] | tojson }})'
+                    class="fail clickable-cell"
+                  >
+                    FAIL
+                  </td>
+                  {% endif %} {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </main>
 
     <!-- Modal -->

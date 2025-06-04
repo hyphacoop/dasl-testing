@@ -36,6 +36,27 @@ function filterTableRows() {
   });
 }
 
+function testGrouping() {
+  const dropdown = document.getElementById("grouping");
+  const selectedValue = dropdown.value;
+
+  // Reset tag filtering also
+  document.getElementById("tagFilter").value = "all";
+  filterTableRows();
+
+  document.querySelectorAll(".test-group-group").forEach((elem) => {
+    elem.style.display = "none";
+  });
+  document.getElementById(selectedValue).style.display = "block";
+
+  if (selectedValue == "tests-by-tag") {
+    // Hide tag filtering when tests are already grouped by tag
+    document.getElementById("tagFilter-container").style.display = "none";
+  } else {
+    document.getElementById("tagFilter-container").style.display = "block";
+  }
+}
+
 // Modal functions
 function showModal(obj) {
   const modal = document.getElementById("modal");
@@ -105,8 +126,13 @@ function displayCharts() {
 document.addEventListener("DOMContentLoaded", function () {
   displayCharts();
 
-  const dropdown = document.getElementById("tagFilter");
-  dropdown.addEventListener("change", filterTableRows);
+  document
+    .getElementById("tagFilter")
+    .addEventListener("change", filterTableRows);
+  document.getElementById("grouping").addEventListener("change", testGrouping);
+
+  // Set up grouping for the first time also
+  testGrouping();
 
   // Close modal when clicking outside of it
   const modal = document.getElementById("modal");

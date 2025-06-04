@@ -10,14 +10,19 @@ env = jinja2.Environment(loader=loader, autoescape=True)
 template = env.get_template("")
 
 libs = []  # {name, link, version}
-items = []  # {name: "file", "results": [Test, Test, ...], ...}
+tests_by_file = []  # {name: "file", "results": [TestResult, TestResult, ...], ...}
+tests_by_tag = []  # {name: "tag", "results": [TestResult, TestResult, ...], ...}
 TestResult = namedtuple(
-    "TestResult", ["type", "data", "name", "tags", "desc", "bools", "details"]
+    "TestResult", ["type", "data", "name", "tags", "desc", "bools", "details", "file"]
 )
 summary = {
     "Basic": {},  # {"lib name": {"pass": 23, "fail": 5}}
     "dag-cbor": {},
 }
+
+# Force some ordering
+tests_by_tag.append({"name": "basic", "results": []})
+tests_by_tag.append({"name": "dag-cbor", "results": []})
 
 with open(sys.argv[1], "r") as f:
     results = json.load(f)
@@ -36,8 +41,57 @@ for test_file in results[libs[0]["name"]]["files"].keys():
         tests = json.load(f)
     test_results = []
     for i, test in enumerate(tests):
+        og_test_tags = test["tags"]
+        # Add tests by tag
+        # Duplicate tests with multiple tags
+        for tag in test["tags"]:
+            found_tag_section = False
+            for j, elem in enumerate(tests_by_tag):
+                if elem["name"] == tag:
+                    found_tag_section = True
+                    # Turn the list of tags into CSS classes
+                    test["tags"] = " ".join(og_test_tags)
+                    tests_by_tag[j]["results"].append(
+                        TestResult(
+                            **test,
+                            bools=[
+                                results[lib["name"]]["files"][test_file][i]["pass"]
+                                for lib in libs
+                            ],
+                            details=[
+                                results[lib["name"]]["files"][test_file][i]
+                                for lib in libs
+                            ],
+                            file=test_file,
+                        )
+                    )
+            if not found_tag_section:
+                # tests_by_tag doesn't have an element for this tag yet
+                # Turn the list of tags into CSS classes
+                test["tags"] = " ".join(og_test_tags)
+                tests_by_tag.append(
+                    {
+                        "name": tag,
+                        "results": [
+                            TestResult(
+                                **test,
+                                bools=[
+                                    results[lib["name"]]["files"][test_file][i]["pass"]
+                                    for lib in libs
+                                ],
+                                details=[
+                                    results[lib["name"]]["files"][test_file][i]
+                                    for lib in libs
+                                ],
+                                file=test_file,
+                            )
+                        ],
+                    }
+                )
+
         # Turn the list of tags into CSS classes
-        test["tags"] = " ".join(test["tags"])
+        test["tags"] = " ".join(og_test_tags)
+        # Add test results to list, to collect for tests_by_file
         test_results.append(
             TestResult(
                 **test,
@@ -45,15 +99,17 @@ for test_file in results[libs[0]["name"]]["files"].keys():
                     results[lib["name"]]["files"][test_file][i]["pass"] for lib in libs
                 ],
                 details=[results[lib["name"]]["files"][test_file][i] for lib in libs],
+                file=test_file,
             )
         )
-    items.append({"name": test_file, "results": test_results})
+
+    tests_by_file.append({"name": test_file, "results": test_results})
 
 # Gather summary information
 for lib in libs:
     summary["Basic"][lib["name"]] = {"pass": 0, "fail": 0}
     summary["dag-cbor"][lib["name"]] = {"pass": 0, "fail": 0}
-for item in items:
+for item in tests_by_file:
     for result in item["results"]:
         tags = result.tags.split(" ")
         if "basic" in tags:
@@ -71,4 +127,11 @@ for item in items:
 
 with open("dist/index.html", "w") as f:
     date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-    f.write(template.render(libs=libs, items=items, date=date, summary=summary))
+    f.write(
+        template.render(
+            libs=libs,
+            tests_by={"file": tests_by_file, "tag": tests_by_tag},
+            date=date,
+            summary=summary,
+        )
+    )

@@ -10,32 +10,32 @@ td.pass {
 td.fail {
   background-color: var(--pico-color-red-500);
 }
-.test-file td,
-.test-file th {
+.test-group td,
+.test-group th {
   border: 2px solid var(--pico-table-border-color);
 }
 :where(table) {
   width: unset;
 }
-.test-file :where(table) {
+.test-group :where(table) {
   margin: auto;
 }
-.test-file th:first-child {
+.test-group th:first-child {
   width: 33ch;
 }
-.test-file th:nth-child(2) {
+.test-group th:nth-child(2) {
   width: 10ch;
 }
 td code {
   word-break: break-all;
 }
-.test-file thead {
+.test-group thead {
   position: sticky;
   top: 0;
   z-index: 999;
 }
 
-div.test-file {
+div.test-group {
   margin-bottom: 2em;
 }
 .hidden {
