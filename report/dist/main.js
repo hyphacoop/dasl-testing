@@ -1,4 +1,41 @@
-// Main filtering function
+function getState() {
+  if (history.state) {
+    return history.state;
+  }
+  let params = new URL(document.location.toString()).searchParams;
+  let state = {
+    group: params.get("group") ?? document.getElementById("grouping").value,
+  };
+  if (state.group === "tests-by-file") {
+    state.tag = params.get("tag") ?? document.getElementById("tagFilter").value;
+  }
+  return state;
+}
+
+function removeHash() {
+  history.replaceState(
+    getState(),
+    "",
+    window.location.pathname + window.location.search,
+  );
+  setTimeout(() => {
+    document.getElementById("tests-header").scrollIntoView();
+  }, 0);
+}
+
+function updateState() {
+  removeHash();
+  let state = {
+    group: document.getElementById("grouping").value,
+  };
+  if (state.group === "tests-by-file") {
+    state.tag = document.getElementById("tagFilter").value;
+  }
+  let url = new URL(document.location.toString());
+  url.search = new URLSearchParams(state).toString();
+  history.pushState(state, "", url);
+}
+
 function filterTableRows() {
   const dropdown = document.getElementById("tagFilter");
   const selectedValue = dropdown.value;
@@ -55,6 +92,18 @@ function testGrouping() {
   } else {
     document.getElementById("tagFilter-container").style.display = "block";
   }
+}
+
+function applyState(state) {
+  document.getElementById("grouping").value = state.group;
+  testGrouping();
+  let tagFilter = document.getElementById("tagFilter");
+  if (state.tag) {
+    tagFilter.value = state.tag;
+  } else {
+    tagFilter.value = "all"; // Default
+  }
+  filterTableRows();
 }
 
 // Modal functions
@@ -124,15 +173,28 @@ function displayCharts() {
 
 // Set up event listener when page loads
 document.addEventListener("DOMContentLoaded", function () {
+  let state = getState();
+  history.replaceState(state, "", document.location.href);
+  applyState(state);
+
   displayCharts();
 
-  document
-    .getElementById("tagFilter")
-    .addEventListener("change", filterTableRows);
-  document.getElementById("grouping").addEventListener("change", testGrouping);
+  document.getElementById("tagFilter").addEventListener("change", () => {
+    filterTableRows();
+    updateState();
+  });
+  document.getElementById("grouping").addEventListener("change", () => {
+    testGrouping();
+    updateState();
+  });
 
-  // Set up grouping for the first time also
-  testGrouping();
+  // Handle forward/back buttons
+  window.addEventListener("popstate", (event) => {
+    if (event.state) {
+      applyState(event.state);
+      removeHash();
+    }
+  });
 
   // Close modal when clicking outside of it
   const modal = document.getElementById("modal");

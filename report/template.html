@@ -91,7 +91,7 @@
             {% endfor %}
           </table>
         </div>
-        <h2>Tests</h2>
+        <h2 id="tests-header">Tests</h2>
         <div class="filter-container">
           <label for="grouping">Group tests by:</label>
           <select id="grouping">
@@ -118,7 +118,8 @@
         <div id="tests-by-{{test_by}}" class="test-group-group">
           {% for item in tests %}
           <div class="test-group">
-            <h3>
+            <h3 id="{{item.name}}">
+              <a href="#{{item.name}}">🔗</a>
               {% if test_by == "file" %}
               <a
                 href="https://github.com/hyphacoop/dasl-testing/blob/main/fixtures/cbor/{{item.name}}"

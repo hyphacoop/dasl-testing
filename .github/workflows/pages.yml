@@ -40,7 +40,7 @@ jobs:
       uses: astral-sh/setup-uv@v6
       with:
         enable-cache: true
-        working-directory: harnesses/dag-cbrrr
+        working-directory: harnesses/python
 
     - name: Verify installations
       run: |
@@ -48,7 +48,6 @@ jobs:
         echo "Node version: $(node --version)"
         echo "npm version: $(npm --version)"
         echo "uv version: $(uv --version)"
-        echo "jq version: $(jq --version)"
 
     - name: Install deps
       run: |
