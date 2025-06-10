@@ -17,9 +17,6 @@ td.fail {
 :where(table) {
   width: unset;
 }
-.test-group :where(table) {
-  margin: auto;
-}
 .test-group th:first-child {
   width: 33ch;
 }

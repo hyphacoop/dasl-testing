@@ -4,6 +4,8 @@ set -euo pipefail
 
 cd harnesses/boxo
 boxo=$(go run ./main.go)
+cd ../go-ipld-cbor
+goipld=$(go run ./main.go)
 
 cd ../js
 helia=$(node main.js helia)
@@ -19,10 +21,12 @@ jq -n \
   --argjson atcute "$atcute" \
   --argjson cbrrr "$cbrrr" \
   --argjson libipld "$libipld" \
+  --argjson goipld "$goipld" \
   '{
     "go-ipld-prime": $boxo,
     "js-dag-cbor": $helia,
     "atcute": $atcute,
     "dag-cbrrr": $cbrrr,
-    "libipld": $libipld
+    "libipld": $libipld,
+    "go-ipld-cbor": $goipld
   }'
