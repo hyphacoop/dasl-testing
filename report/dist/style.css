@@ -23,7 +23,11 @@ td.fail {
 .test-group th:nth-child(2) {
   width: 10ch;
 }
-td code {
+.test-group th {
+  width: 10ch;
+  word-break: break-word;
+}
+.test-group td code {
   word-break: break-all;
 }
 .test-group thead {

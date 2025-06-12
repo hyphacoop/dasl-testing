@@ -17,7 +17,7 @@
     "type": "invalid_in",
     "data": "e0",
     "name": "unassigned simple value",
-    "tags": ["dag-cbor", "c42", "dCBOR"],
+    "tags": ["basic"],
     "desc": "this simple value is unassigned by the spec and must be invalid"
   },
   {

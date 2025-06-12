@@ -27,7 +27,9 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: 'stable'
-        cache-dependency-path: harnesses/boxo/go.sum
+        cache-dependency-path: |
+          harnesses/boxo/go.sum
+          harnesses/go-ipld-cbor/go.sum
 
     - name: Setup Node.js LTS
       uses: actions/setup-node@v4
@@ -42,12 +44,22 @@ jobs:
         enable-cache: true
         working-directory: harnesses/python
 
+    - name: Rust cache
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
     - name: Verify installations
       run: |
         echo "Go version: $(go version)"
         echo "Node version: $(node --version)"
         echo "npm version: $(npm --version)"
         echo "uv version: $(uv --version)"
+        echo "rustc version: $(rustc --version)"
 
     - name: Install deps
       run: |

@@ -15,6 +15,9 @@ cd ../python
 cbrrr=$(uv run main.py dag-cbrrr)
 libipld=$(uv run main.py libipld)
 
+cd ../serde_ipld_dagcbor
+rust=$(cargo run)
+
 jq -n \
   --argjson boxo "$boxo" \
   --argjson helia "$helia" \
@@ -22,11 +25,13 @@ jq -n \
   --argjson cbrrr "$cbrrr" \
   --argjson libipld "$libipld" \
   --argjson goipld "$goipld" \
+  --argjson rust "$rust" \
   '{
     "go-ipld-prime": $boxo,
     "js-dag-cbor": $helia,
     "atcute": $atcute,
     "dag-cbrrr": $cbrrr,
     "libipld": $libipld,
-    "go-ipld-cbor": $goipld
+    "go-ipld-cbor": $goipld,
+    "serde_ipld_dagcbor": $rust
   }'
