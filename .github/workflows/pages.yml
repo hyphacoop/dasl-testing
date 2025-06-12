@@ -50,7 +50,7 @@ jobs:
         path: |
           ~/.cargo/registry
           ~/.cargo/git
-          target
+          harnesses/serde_ipld_dagcbor/target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
     - name: Verify installations
