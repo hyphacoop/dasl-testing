@@ -1,0 +1,77 @@
+name: Update libs daily
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  # Allow manual triggering for testing
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        # Use a token that can push to protected branches if needed
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 'stable'
+        cache-dependency-path: |
+          harnesses/boxo/go.sum
+          harnesses/go-ipld-cbor/go.sum
+
+    - name: Setup Node.js LTS
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts/*'
+        cache: 'npm'
+        cache-dependency-path: harnesses/js/package-lock.json
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        working-directory: harnesses/python
+
+    - name: Rust cache
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          harnesses/serde_ipld_dagcbor/target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Verify installations
+      run: |
+        echo "Go version: $(go version)"
+        echo "Node version: $(node --version)"
+        echo "npm version: $(npm --version)"
+        echo "uv version: $(uv --version)"
+        echo "rustc version: $(rustc --version)"
+
+    - name: Install deps
+      run: |
+        cd harnesses/js
+        npm install
+
+    - run: ./update_libs.sh
+    
+    - name: Check for changes
+      id: git-check
+      run: |
+        git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+    
+    - name: Commit and push changes
+      if: steps.git-check.outputs.changes == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git commit -m "automated: update libs"
+        git push

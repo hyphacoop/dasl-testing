@@ -36,9 +36,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "cbor2", specifier = ">=5.6.5" },
-    { name = "cbrrr", specifier = ">=1.0.1" },
-    { name = "libipld", specifier = ">=3.0.1" },
+    { name = "cbor2", specifier = "==5.6.5" },
+    { name = "cbrrr", specifier = "<2" },
+    { name = "libipld", specifier = "<4" },
 ]
 
 [[package]]
