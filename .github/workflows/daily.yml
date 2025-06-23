@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         # Use a token that can push to protected branches if needed
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PAT_TOKEN }}
     
     - name: Setup Go
       uses: actions/setup-go@v4
