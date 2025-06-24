@@ -54,5 +54,26 @@
     "name": "highest negative bigint",
     "tags": ["CBOR-Core", "c42"],
     "desc": "the largest negative CBOR big integer value, valid in specs that support big integers"
+  },
+  {
+    "type": "invalid_out",
+    "data": "c249010000000000000000",
+    "name": "bignum",
+    "tags": ["dag-cbor"],
+    "desc": "big integers are banned for encoding by dag-cbor"
+  },
+  {
+    "type": "invalid_in",
+    "data": "c249010000000000000000",
+    "name": "bignum",
+    "tags": ["dag-cbor"],
+    "desc": "big integers are banned for decoding by dag-cbor"
+  },
+  {
+    "type": "invalid_in",
+    "data": "c24101",
+    "name": "bignum with small value",
+    "tags": ["dag-cbor", "rfc8949"],
+    "desc": "an bignum with a value in the valid range is still banned in dag-cbor, and improper in RFC 8949 preferred serialization"
   }
 ]

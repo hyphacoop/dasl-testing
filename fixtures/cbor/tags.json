@@ -12,12 +12,5 @@
     "name": "tagged object (datetime)",
     "tags": ["dag-cbor", "c42"],
     "desc": "an object that could be encoded as a CBOR tag (a datetime in this case) should be rejected by dag-cbor encoders"
-  },
-  {
-    "type": "invalid_out",
-    "data": "c249010000000000000000",
-    "name": "bignum",
-    "tags": ["dag-cbor"],
-    "desc": "big integers are banned for encoding by dag-cbor"
   }
 ]
