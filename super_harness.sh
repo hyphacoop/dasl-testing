@@ -18,6 +18,9 @@ libipld=$(uv run main.py libipld)
 cd ../serde_ipld_dagcbor
 rust=$(cargo run)
 
+cd ../java-dag-cbor
+java=$(mvn exec:java -Dexec.mainClass="coop.hypha.Main" -q)
+
 jq -n \
   --argjson boxo "$boxo" \
   --argjson helia "$helia" \
@@ -26,6 +29,7 @@ jq -n \
   --argjson libipld "$libipld" \
   --argjson goipld "$goipld" \
   --argjson rust "$rust" \
+  --argjson java "$java" \
   '{
     "go-ipld-prime": $boxo,
     "js-dag-cbor": $helia,
@@ -33,5 +37,6 @@ jq -n \
     "dag-cbrrr": $cbrrr,
     "python-libipld": $libipld,
     "go-ipld-cbor": $goipld,
-    "serde_ipld_dagcbor": $rust
+    "serde_ipld_dagcbor": $rust,
+    "java-dag-cbor": $java
   }'
