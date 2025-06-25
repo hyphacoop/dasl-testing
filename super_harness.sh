@@ -31,7 +31,7 @@ jq -n \
     "js-dag-cbor": $helia,
     "atcute": $atcute,
     "dag-cbrrr": $cbrrr,
-    "libipld": $libipld,
+    "python-libipld": $libipld,
     "go-ipld-cbor": $goipld,
     "serde_ipld_dagcbor": $rust
   }'
