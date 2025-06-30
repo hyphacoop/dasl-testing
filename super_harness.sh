@@ -16,9 +16,10 @@ cbrrr=$(uv run main.py dag-cbrrr)
 libipld=$(uv run main.py libipld)
 
 cd ../serde_ipld_dagcbor
-rust=$(cargo run)
+rust=$(cargo run -q)
 
 cd ../java-dag-cbor
+mvn compile -q
 java=$(mvn exec:java -Dexec.mainClass="coop.hypha.Main" -q)
 
 jq -n \

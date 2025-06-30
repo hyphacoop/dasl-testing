@@ -7,6 +7,7 @@
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
+    <jackson.version>2.19.0</jackson.version>
   </properties>
   <repositories>
     <repository>
@@ -19,6 +20,16 @@
       <groupId>com.github.peergos</groupId>
       <artifactId>dag-cbor</artifactId>
       <version>0.1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-cbor</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
   </dependencies>
 </project>
