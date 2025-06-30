@@ -173,7 +173,11 @@ public class Main {
                         // Failed to decode an invalid input, so the test passes
                         results.add(new TestResult(true, null, invalidDecodeResult.info));
                     } else {
-                        results.add(new TestResult(false));
+                        if (invalidDecodeResult.info.length() > 0) {
+                            results.add(new TestResult(false, null, invalidDecodeResult.info));
+                        } else {
+                            results.add(new TestResult(false));
+                        }
                     }
                     break;
                     
@@ -183,7 +187,11 @@ public class Main {
                         // Failed to encode invalid data, so the test passes
                         results.add(new TestResult(true, null, invalidEncodeResult.info));
                     } else {
-                        results.add(new TestResult(false));
+                        if (invalidEncodeResult != null && invalidEncodeResult.info.length() > 0) {
+                            results.add(new TestResult(false, null, invalidEncodeResult.info));
+                        } else {
+                            results.add(new TestResult(false));
+                        }
                     }
                     break;
                     
@@ -241,6 +249,8 @@ public class Main {
             return new CborObject.CborNull();
         // } else if (obj instanceof String) {
         //     return new CborObject.CborString((String)obj);
+        } else if (obj instanceof Float || obj instanceof Double) {
+            throw new RuntimeException("java-dag-cbor doesn't support floats");
         } else if (obj instanceof Integer || obj instanceof Long || obj instanceof Short || obj instanceof Byte) {
             return new CborObject.CborLong(((Number) obj).longValue());
         // } else if (obj instanceof Boolean) {
