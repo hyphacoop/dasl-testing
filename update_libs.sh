@@ -17,3 +17,6 @@ uv lock -U
 
 cd ../serde_ipld_dagcbor
 cargo update serde_ipld_dagcbor
+
+cd ../java-dag-cbor
+mvn versions:use-latest-versions
