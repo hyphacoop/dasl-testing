@@ -11,5 +11,6 @@ Run the test suite locally by running `./run.sh` after installing all the depend
 - Node and npm
 - [uv](https://docs.astral.sh/uv/) for Python
 - Rust (and `cargo`)
+- Java 21 (LTS) and Maven
 
 Make sure to run `npm install` in `harnesses/js/` before starting.

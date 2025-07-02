@@ -18,7 +18,7 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -53,6 +53,14 @@ jobs:
           harnesses/serde_ipld_dagcbor/target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        architecture: x64
+        cache: maven
+
     - name: Verify installations
       run: |
         echo "Go version: $(go version)"
@@ -60,6 +68,7 @@ jobs:
         echo "npm version: $(npm --version)"
         echo "uv version: $(uv --version)"
         echo "rustc version: $(rustc --version)"
+        echo "maven version: $(mvn --version)"
 
     - name: Install deps
       run: |
