@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.peergos.cbor.*;
 import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
 
+
 public class Main {
     
     public static class TestResult {
@@ -233,8 +234,6 @@ public class Main {
             Object obj = mapper.readValue(data, Object.class);
             dagCborEncode(obj);
             return new InvalidResult(false, "");
-        } catch (UnsupportedOperationException e) {
-            return new InvalidResult(false, e.toString());
         } catch (Exception e) {
             return new InvalidResult(true, e.toString());
         }
