@@ -18,7 +18,7 @@
     <dependency>
       <groupId>com.github.peergos</groupId>
       <artifactId>dag-cbor</artifactId>
-      <version>v0.1.6</version>
+      <version>v0.1.8</version>
     </dependency>
     <dependency>
       <groupId>com.authlete</groupId>
