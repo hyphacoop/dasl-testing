@@ -249,7 +249,7 @@ public class Main {
         // } else if (obj instanceof String) {
         //     return new CborObject.CborString((String)obj);
         } else if (obj instanceof Float || obj instanceof Double) {
-            throw new RuntimeException("java-dag-cbor doesn't support floats");
+            return new CborObject.CborDouble(((Number) obj).doubleValue());
         } else if (obj instanceof Integer || obj instanceof Long || obj instanceof Short || obj instanceof Byte) {
             return new CborObject.CborLong(((Number) obj).longValue());
         // } else if (obj instanceof Boolean) {
