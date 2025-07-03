@@ -4,12 +4,12 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.peergos.cbor.*;
-import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
-
+import com.authlete.cbor.CBORParser;
 
 public class Main {
     
@@ -230,8 +230,7 @@ public class Main {
     
     private static InvalidResult invalidEncode(byte[] data) {
         try {
-            ObjectMapper mapper = new ObjectMapper(new CBORFactory());
-            Object obj = mapper.readValue(data, Object.class);
+            Object obj = new CBORParser(data).next();
             dagCborEncode(obj);
             return new InvalidResult(false, "");
         } catch (Exception e) {
