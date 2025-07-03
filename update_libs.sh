@@ -19,4 +19,7 @@ cd ../serde_ipld_dagcbor
 cargo update serde_ipld_dagcbor
 
 cd ../java-dag-cbor
-mvn versions:use-latest-versions
+# Manually use latest tag
+latest_tag=$(curl -s "https://api.github.com/repos/peergos/dag-cbor/tags" | jq -r '.[0].name')
+mvn versions:use-latest-versions -DgenerateBackupPoms=false
+mvn versions:use-dep-version -Dincludes="com.github.peergos:dag-cbor" -DdepVersion="$latest_tag" -DforceVersion=true -DgenerateBackupPoms=false
