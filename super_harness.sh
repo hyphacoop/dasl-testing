@@ -37,12 +37,12 @@ jq -n \
   --argjson java "$java" \
   '{
     "go-ipld-prime": $boxo,
+    "go-ipld-cbor": $goipld,
     "js-dag-cbor": $helia,
     "atcute": $atcute,
     "dag-cbrrr": $cbrrr,
     "python-libipld": $pylibipld,
-    "go-ipld-cbor": $goipld,
     "serde_ipld_dagcbor": $serde_ipld_dagcbor,
-    "java-dag-cbor": $java,
-    "libipld": $libipld
+    "libipld": $libipld,
+    "java-dag-cbor": $java
   }'
