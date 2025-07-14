@@ -13,10 +13,13 @@ atcute=$(node main.js atcute)
 
 cd ../python
 cbrrr=$(uv run main.py dag-cbrrr)
-libipld=$(uv run main.py libipld)
+pylibipld=$(uv run main.py libipld)
 
 cd ../serde_ipld_dagcbor
-rust=$(cargo run -q)
+serde_ipld_dagcbor=$(cargo run -q)
+
+cd ../libipld
+libipld=$(cargo run -q)
 
 cd ../java-dag-cbor
 mvn compile -q
@@ -27,17 +30,19 @@ jq -n \
   --argjson helia "$helia" \
   --argjson atcute "$atcute" \
   --argjson cbrrr "$cbrrr" \
+  --argjson pylibipld "$pylibipld" \
   --argjson libipld "$libipld" \
   --argjson goipld "$goipld" \
-  --argjson rust "$rust" \
+  --argjson serde_ipld_dagcbor "$serde_ipld_dagcbor" \
   --argjson java "$java" \
   '{
     "go-ipld-prime": $boxo,
     "js-dag-cbor": $helia,
     "atcute": $atcute,
     "dag-cbrrr": $cbrrr,
-    "python-libipld": $libipld,
+    "python-libipld": $pylibipld,
     "go-ipld-cbor": $goipld,
-    "serde_ipld_dagcbor": $rust,
-    "java-dag-cbor": $java
+    "serde_ipld_dagcbor": $serde_ipld_dagcbor,
+    "java-dag-cbor": $java,
+    "libipld": $libipld
   }'

@@ -18,6 +18,9 @@ uv lock -U
 cd ../serde_ipld_dagcbor
 cargo update serde_ipld_dagcbor
 
+cd ../libipld
+cargo update libipld
+
 cd ../java-dag-cbor
 # Manually use latest tag
 latest_tag=$(curl -s "https://api.github.com/repos/peergos/dag-cbor/tags" | jq -r '.[0].name')
