@@ -199,6 +199,8 @@ fn cbor_value_to_ipld(value: ciborium::Value) -> Result<Ipld, String> {
             for (k, v) in map {
                 if let ciborium::Value::Text(key) = k {
                     ipld_map.insert(key, cbor_value_to_ipld(v)?);
+                } else {
+                    return Err(format!("Map keys must be strings, found: {:?}", k));
                 }
             }
             Ok(Ipld::Map(ipld_map))
