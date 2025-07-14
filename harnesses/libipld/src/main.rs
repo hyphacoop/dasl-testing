@@ -37,7 +37,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut results = Results {
         metadata: Metadata {
             link: "https://github.com/ipld/libipld".to_string(),
-            version: "0.16.0".to_string(),
+            version: get_dependency_version("libipld"),
         },
         files: HashMap::new(),
     };
@@ -205,4 +205,25 @@ fn cbor_value_to_ipld(value: ciborium::Value) -> Result<Ipld, String> {
         }
         _ => Err(format!("Unsupported CBOR type: {:?}", value)),
     }
+}
+
+fn get_dependency_version(dependency: &str) -> String {
+    let cargo_toml = std::fs::read_to_string("Cargo.toml")
+        .unwrap_or_else(|_| panic!("Failed to read Cargo.toml"));
+    
+    for line in cargo_toml.lines() {
+        let line = line.trim();
+        if line.starts_with(&format!("{} = ", dependency)) {
+            // Handle formats like: libipld = "0.16.0"
+            if let Some(version_start) = line.find('"') {
+                if let Some(version_end) = line.rfind('"') {
+                    if version_start < version_end {
+                        return line[version_start + 1..version_end].to_string();
+                    }
+                }
+            }
+        }
+    }
+    
+    format!("unknown-{}", dependency)
 }

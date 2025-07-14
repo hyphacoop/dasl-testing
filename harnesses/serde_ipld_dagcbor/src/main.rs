@@ -37,7 +37,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut results = Results {
         metadata: Metadata {
             link: "https://github.com/ipld/serde_ipld_dagcbor".to_string(),
-            version: "0.6.3".to_string(),
+            version: get_dependency_version("serde_ipld_dagcbor"),
         },
         files: HashMap::new(),
     };
@@ -181,4 +181,25 @@ fn invalid_encode(b: &[u8]) -> (bool, String) {
         Ok(_) => (false, String::new()),
         Err(e) => (true, e.to_string()),
     }
+}
+
+fn get_dependency_version(dependency: &str) -> String {
+    let cargo_toml = std::fs::read_to_string("Cargo.toml")
+        .unwrap_or_else(|_| panic!("Failed to read Cargo.toml"));
+    
+    for line in cargo_toml.lines() {
+        let line = line.trim();
+        if line.starts_with(&format!("{} = ", dependency)) {
+            // Handle formats like: serde_ipld_dagcbor = "0.6.3"
+            if let Some(version_start) = line.find('"') {
+                if let Some(version_end) = line.rfind('"') {
+                    if version_start < version_end {
+                        return line[version_start + 1..version_end].to_string();
+                    }
+                }
+            }
+        }
+    }
+    
+    format!("unknown-{}", dependency)
 }
