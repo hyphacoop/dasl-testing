@@ -137,6 +137,7 @@ function displayCharts() {
         textStyle: {
           color: "#c2c7d0",
         },
+        left: "center",
       },
       series: [
         {
