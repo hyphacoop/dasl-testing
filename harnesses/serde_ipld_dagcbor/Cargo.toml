@@ -10,3 +10,6 @@ serde_json = "1.0"
 hex = "0.4"
 ciborium = "0.2.2"
 ipld-core = "0.4.2"
+
+[build-dependencies]
+built = { version = "0.7", features = ["dependency-tree"] }

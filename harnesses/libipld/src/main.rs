@@ -5,6 +5,8 @@ use std::collections::HashMap;
 use std::fs;
 use std::io::Cursor;
 
+include!(concat!(env!("OUT_DIR"), "/built.rs"));
+
 #[derive(serde::Serialize, serde::Deserialize)]
 struct TestResult {
     pass: bool,
@@ -210,22 +212,9 @@ fn cbor_value_to_ipld(value: ciborium::Value) -> Result<Ipld, String> {
 }
 
 fn get_dependency_version(dependency: &str) -> String {
-    let cargo_toml = std::fs::read_to_string("Cargo.toml")
-        .unwrap_or_else(|_| panic!("Failed to read Cargo.toml"));
-    
-    for line in cargo_toml.lines() {
-        let line = line.trim();
-        if line.starts_with(&format!("{} = ", dependency)) {
-            // Handle formats like: libipld = "0.16.0"
-            if let Some(version_start) = line.find('"') {
-                if let Some(version_end) = line.rfind('"') {
-                    if version_start < version_end {
-                        return line[version_start + 1..version_end].to_string();
-                    }
-                }
-            }
-        }
-    }
-    
-    format!("unknown-{}", dependency)
+    DEPENDENCIES
+        .iter()
+        .find(|(name, _)| name == &dependency)
+        .map(|(_, version_info)| version_info.to_string())
+        .unwrap_or_else(|| format!("unknown-{}", dependency))
 }
