@@ -61,5 +61,12 @@
     "name": "disallowed hash type (SHA-1)",
     "tags": ["dasl-cid"],
     "desc": "a valid CIDv1 that uses the SHA-1 hash, invalid in the DASL CID spec"
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a5825015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
+    "name": "CID with no null byte",
+    "tags": ["basic"],
+    "desc": "valid CIDs in CBOR must start with 0x00, this one misses that but is otherwise valid"
   }
 ]
