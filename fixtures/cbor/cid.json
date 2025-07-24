@@ -64,7 +64,7 @@
   },
   {
     "type": "invalid_in",
-    "data": "d82a5825015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
+    "data": "d82a5824015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
     "name": "CID with no null byte",
     "tags": ["basic"],
     "desc": "valid CIDs in CBOR must start with 0x00, this one misses that but is otherwise valid"
