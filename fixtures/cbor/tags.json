@@ -12,5 +12,12 @@
     "name": "tagged object (datetime)",
     "tags": ["dag-cbor", "c42"],
     "desc": "an object that could be encoded as a CBOR tag (a datetime in this case) should be rejected by dag-cbor encoders"
+  },
+  {
+    "type": "invalid_in",
+    "data": "d9d9f700",
+    "name": "self-describing CBOR",
+    "tags": ["dag-cbor", "c42"],
+    "desc": "the self-describing CBOR tag, 55799, should also be forbidden"
   }
 ]
