@@ -6,6 +6,8 @@ cd harnesses/boxo
 boxo=$(go run ./main.go)
 cd ../go-ipld-cbor
 goipld=$(go run ./main.go)
+cd ../go-dasl
+godasl=$(go run ./main.go)
 
 cd ../js
 helia=$(node main.js helia)
@@ -26,6 +28,7 @@ mvn compile -q
 java=$(mvn exec:java -Dexec.mainClass="coop.hypha.Main" -q)
 
 jq -n \
+  --argjson godasl "$godasl" \
   --argjson boxo "$boxo" \
   --argjson helia "$helia" \
   --argjson atcute "$atcute" \
@@ -36,6 +39,7 @@ jq -n \
   --argjson serde_ipld_dagcbor "$serde_ipld_dagcbor" \
   --argjson java "$java" \
   '{
+    "go-dasl": $godasl,
     "go-ipld-prime": $boxo,
     "go-ipld-cbor": $goipld,
     "js-dag-cbor": $helia,

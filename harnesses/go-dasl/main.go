@@ -12,7 +12,7 @@ import (
 	"strings"
 
 	"github.com/fxamacker/cbor/v2"
-	cbornode "github.com/ipfs/go-ipld-cbor"
+	"github.com/hyphacoop/go-dasl/drisl"
 )
 
 type testResult struct {
@@ -37,8 +37,8 @@ func main() {
 		Files    map[string][]*testResult `json:"files"`
 	}{
 		Metadata: metadata{
-			Link:    "https://github.com/ipfs/go-ipld-cbor",
-			Version: getModuleVersion("github.com/ipfs/go-ipld-cbor"),
+			Link:    "https://github.com/ipld/go-ipld-prime",
+			Version: getModuleVersion("github.com/ipld/go-ipld-prime"),
 		},
 		Files: make(map[string][]*testResult),
 	}
@@ -130,18 +130,26 @@ func runTests(tests []*testCase) []*testResult {
 }
 
 func roundtrip(b []byte) ([]byte, error) {
-	var obj any
-	if err := cbornode.DecodeInto(b, &obj); err != nil {
+	// Decode using library to test decoding ability
+	var v any
+	dec, err := drisl.DecOptions{
+		MaxNestedLevels: 3001, // For nested test
+	}.DecMode()
+	if err != nil {
+		panic(err)
+	}
+	if err := dec.Unmarshal(b, &v); err != nil {
 		return nil, err
 	}
-	return cbornode.Encode(obj)
+	// Re-encode and return to check nothing changed
+	return drisl.Marshal(v)
 }
 
 // invalidDecode returns true if the provided CBOR is invalid.
 // The second return value is the error.
 func invalidDecode(b []byte) (bool, string) {
-	var obj any
-	err := cbornode.DecodeInto(b, &obj)
+	var v any
+	err := drisl.Unmarshal(b, &v)
 	if err == nil {
 		return false, ""
 	}
@@ -156,7 +164,7 @@ func invalidEncode(b []byte) (bool, string) {
 	if err := cbor.Unmarshal(b, &obj); err != nil {
 		panic(fmt.Errorf("general CBOR library failed to decode test input: %v", err))
 	}
-	_, err := cbornode.Encode(obj)
+	_, err := drisl.Marshal(obj)
 	if err == nil {
 		return false, ""
 	}

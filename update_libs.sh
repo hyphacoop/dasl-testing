@@ -8,6 +8,9 @@ go get github.com/ipld/go-ipld-prime@v0
 cd ../go-ipld-cbor
 go get github.com/ipfs/go-ipld-cbor@v0
 
+cd ../go-dasl
+go get github.com/hyphacoop/go-dasl@latest
+
 cd ../js
 npm update @ipld/dag-cbor
 npm update @atcute/cbor
