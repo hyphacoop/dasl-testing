@@ -6,6 +6,8 @@ github.com/hyphacoop/go-dasl v0.2.1-0.20250820185929-330cad8e92ce h1:R8WBsGKdUXp
 github.com/hyphacoop/go-dasl v0.2.1-0.20250820185929-330cad8e92ce/go.mod h1:CzV8eD4nOe5wdKXakwraaojKMSSnvAoAAnoAIsnKVAo=
 github.com/hyphacoop/go-dasl v0.2.1 h1:exEOjj8qSyEeNfPxPUllgYexV4I9qgJwVT5dbIMcWUI=
 github.com/hyphacoop/go-dasl v0.2.1/go.mod h1:CzV8eD4nOe5wdKXakwraaojKMSSnvAoAAnoAIsnKVAo=
+github.com/hyphacoop/go-dasl v0.3.0 h1:FqVcDPf2sUZ6LXg435fEghLJV/siu4td0glbsRMawSY=
+github.com/hyphacoop/go-dasl v0.3.0/go.mod h1:CzV8eD4nOe5wdKXakwraaojKMSSnvAoAAnoAIsnKVAo=
 github.com/multiformats/go-varint v0.1.0 h1:i2wqFp4sdl3IcIxfAonHQV9qU5OsZ4Ts9IOoETFs5dI=
 github.com/multiformats/go-varint v0.1.0/go.mod h1:5KVAVXegtfmNQQm/lCY+ATvDzvJJhSkUlGQV9wgObdI=
 github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
