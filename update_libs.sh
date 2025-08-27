@@ -4,12 +4,15 @@ set -euo pipefail
 
 cd harnesses/boxo
 go get github.com/ipld/go-ipld-prime@v0
+go mod tidy
 
 cd ../go-ipld-cbor
 go get github.com/ipfs/go-ipld-cbor@v0
+go mod tidy
 
 cd ../go-dasl
 go get github.com/hyphacoop/go-dasl@latest
+go mod tidy
 
 cd ../js
 npm update @ipld/dag-cbor
