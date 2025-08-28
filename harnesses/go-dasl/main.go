@@ -164,7 +164,13 @@ func invalidEncode(b []byte) (bool, string) {
 	if err := cbor.Unmarshal(b, &obj); err != nil {
 		panic(fmt.Errorf("general CBOR library failed to decode test input: %v", err))
 	}
-	_, err := drisl.Marshal(obj)
+	enc, err := drisl.EncOptions{
+		Time: drisl.TimeModeReject, // For datetime test
+	}.EncMode()
+	if err != nil {
+		panic(err)
+	}
+	_, err = enc.Marshal(obj)
 	if err == nil {
 		return false, ""
 	}
