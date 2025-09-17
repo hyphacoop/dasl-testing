@@ -24,6 +24,9 @@ uv lock -U
 cd ../serde_ipld_dagcbor
 cargo update serde_ipld_dagcbor
 
+cd ../n0_dasl
+cargo update dasl
+
 cd ../libipld
 cargo update libipld
 
