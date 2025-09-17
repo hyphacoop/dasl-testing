@@ -20,6 +20,9 @@ pylibipld=$(uv run main.py libipld)
 cd ../serde_ipld_dagcbor
 serde_ipld_dagcbor=$(cargo run -q)
 
+cd ../n0_dasl
+n0_dasl=$(cargo run -q)
+
 cd ../libipld
 libipld=$(cargo run -q)
 
@@ -36,6 +39,7 @@ jq -n \
   --argjson pylibipld "$pylibipld" \
   --argjson libipld "$libipld" \
   --argjson goipld "$goipld" \
+  --argjson n0_dasl "$n0_dasl" \
   --argjson serde_ipld_dagcbor "$serde_ipld_dagcbor" \
   --argjson java "$java" \
   '{
@@ -46,6 +50,7 @@ jq -n \
     "atcute": $atcute,
     "dag-cbrrr": $cbrrr,
     "python-libipld": $pylibipld,
+    "n0_dasl": $n0_dasl,
     "serde_ipld_dagcbor": $serde_ipld_dagcbor,
     "libipld": $libipld,
     "java-dag-cbor": $java
