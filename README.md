@@ -14,3 +14,13 @@ Run the test suite locally by running `./run.sh` after installing all the depend
 - Java 21 (LTS) and Maven
 
 Make sure to run `npm install` in `harnesses/js/` before starting.
+
+## Contributing
+
+Look at the existing harnesses for reference. After creating your own, update `super_harness.sh`
+and `update_libs.sh` to handle your new harness as well. Running `./run.sh` should now show
+your harness in the report.
+
+## License
+
+This code is made available under the MIT license.
