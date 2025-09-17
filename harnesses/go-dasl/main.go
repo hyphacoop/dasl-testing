@@ -37,8 +37,8 @@ func main() {
 		Files    map[string][]*testResult `json:"files"`
 	}{
 		Metadata: metadata{
-			Link:    "https://github.com/ipld/go-ipld-prime",
-			Version: getModuleVersion("github.com/ipld/go-ipld-prime"),
+			Link:    "https://github.com/hyphacoop/go-dasl",
+			Version: getModuleVersion("github.com/hyphacoop/go-dasl"),
 		},
 		Files: make(map[string][]*testResult),
 	}
