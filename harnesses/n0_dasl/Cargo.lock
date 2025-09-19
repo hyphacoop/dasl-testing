@@ -140,8 +140,8 @@ dependencies = [
 
 [[package]]
 name = "dasl"
-version = "0.1.0"
-source = "git+https://github.com/n0-computer/dasl.git?branch=main#e25468e300e16d491461ee9c2082cf8ebb9b7d26"
+version = "0.2.0"
+source = "git+https://github.com/n0-computer/dasl.git?branch=main#54b7b50e241cb5f9ee5693b463684abdde4b3281"
 dependencies = [
  "blake3",
  "cbor4ii",
