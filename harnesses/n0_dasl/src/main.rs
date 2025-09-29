@@ -40,7 +40,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut results = Results {
         metadata: Metadata {
             link: "https://github.com/n0-computer/dasl".to_string(),
-            version: get_dependency_version("serde_ipld_dagcbor"),
+            version: get_dependency_version("dasl"),
         },
         files: HashMap::new(),
     };
