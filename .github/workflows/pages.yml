@@ -52,6 +52,7 @@ jobs:
           ~/.cargo/git
           harnesses/serde_ipld_dagcbor/target
           harnesses/libipld/target
+          harnesses/n0_dasl/target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
     - name: Set up Java
