@@ -42,11 +42,25 @@
     "desc": "a valid BLAKE3 CID, also known as Big DASL"
   },
   {
-    "type": "roundtrip",
+    "type": "invalid_in",
     "data": "d82a450001551200",
     "name": "empty CID",
-    "tags": ["basic", "dasl-cid"],
+    "tags": ["dasl-cid"],
     "desc": "a valid CIDv1 with no hash data (hash length of zero)"
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a5824000155121f5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be",
+    "name": "short hash digest",
+    "tags": ["dasl-cid"],
+    "desc": "a valid (IPFS) CID that has a hash digest < 32 bytes"
+  },
+  {
+    "type": "invalid_in",
+    "data": "d82a582600015512215891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be0300",
+    "name": "long hash digest",
+    "tags": ["dasl-cid"],
+    "desc": "a valid (IPFS) CID that has a hash digest > 32 bytes"
   },
   {
     "type": "invalid_in",
