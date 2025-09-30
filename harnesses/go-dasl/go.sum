@@ -1,11 +1,9 @@
 github.com/fxamacker/cbor/v2 v2.9.0 h1:NpKPmjDBgUfBms6tr6JZkTHtfFGcMKsw3eGcmD/sapM=
 github.com/fxamacker/cbor/v2 v2.9.0/go.mod h1:vM4b+DJCtHn+zz7h3FFp/hDAI9WNWCsZj23V5ytsSxQ=
-github.com/hyphacoop/cbor/v2 v2.0.0-20250827195905-4b6b4a1b5aef h1:4kTG6LyAEeU8LUlGpQAOg+deIyRf/L06ZnoYGqno4ec=
-github.com/hyphacoop/cbor/v2 v2.0.0-20250827195905-4b6b4a1b5aef/go.mod h1:1ny0WdocVllO4iUxV5eXuJ9vMzmZ2nITeZg7uBxVEeU=
-github.com/hyphacoop/go-dasl v0.6.0 h1:t81KmXxVcD8wPLhRosPP7JM6Iw6RtlLufNs/VrNMDOA=
-github.com/hyphacoop/go-dasl v0.6.0/go.mod h1:Jfm6oik86TjBHdNMyWtZbF0J6pm945tZ+fc/ZATdDfA=
-github.com/multiformats/go-varint v0.1.0 h1:i2wqFp4sdl3IcIxfAonHQV9qU5OsZ4Ts9IOoETFs5dI=
-github.com/multiformats/go-varint v0.1.0/go.mod h1:5KVAVXegtfmNQQm/lCY+ATvDzvJJhSkUlGQV9wgObdI=
+github.com/hyphacoop/cbor/v2 v2.0.0-20250917145243-84c9e8824562 h1:/7ygHDzoQh9vnXGOlV1Elcx7We6PmM3X/jl1p/+loq8=
+github.com/hyphacoop/cbor/v2 v2.0.0-20250917145243-84c9e8824562/go.mod h1:1ny0WdocVllO4iUxV5eXuJ9vMzmZ2nITeZg7uBxVEeU=
+github.com/hyphacoop/go-dasl v0.7.0 h1:tbQbVLsEc1bT60Khvufqn9xDWRZGa6KWcrS4WOWTdgE=
+github.com/hyphacoop/go-dasl v0.7.0/go.mod h1:sdQ9CoTzjLnma140KESAgp1JUu1/zX5B6BuDnDEzlTo=
 github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
 github.com/x448/float16 v0.8.4/go.mod h1:14CWIYCyZA/cWjXOioeEpHeN/83MdbZDRQHoFcYsOfg=
 pgregory.net/rapid v1.2.0 h1:keKAYRcjm+e1F0oAuU5F5+YPAWcyxNNRK2wud503Gnk=
