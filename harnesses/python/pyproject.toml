@@ -5,5 +5,5 @@ requires-python = ">=3.13"
 dependencies = [
     "cbor2==5.6.5",
     "cbrrr<2",
-    "libipld<4",
+    "libipld==3.2.0",
 ]
