@@ -9,14 +9,20 @@ import (
 	"os"
 	"path/filepath"
 	"runtime/debug"
+	"slices"
 	"strings"
 
 	"github.com/ipld/go-ipld-prime/codec/dagcbor"
 	"github.com/ipld/go-ipld-prime/node/basicnode"
 )
 
+// Test IDs to skip
+var skippedTestIDs = []string{
+	// Add test IDs here to skip them
+}
+
 type testResult struct {
-	Pass   bool   `json:"pass"`
+	Pass   *bool  `json:"pass"`
 	Output string `json:"output,omitempty"`
 	Error  string `json:"error,omitempty"`
 }
@@ -24,6 +30,7 @@ type testResult struct {
 type testCase struct {
 	Type string
 	Data string
+	ID   string
 	Tags []string
 }
 type metadata struct {
@@ -72,8 +79,17 @@ func main() {
 }
 
 func runTests(tests []*testCase) []*testResult {
+	trueVal, falseVal := true, false
 	results := make([]*testResult, len(tests))
 	for i, test := range tests {
+		// Check if this test should be skipped based on its ID
+		if test.ID != "" && slices.Contains(skippedTestIDs, test.ID) {
+			results[i] = &testResult{
+				Pass: nil,
+			}
+			continue
+		}
+
 		testData, err := hex.DecodeString(test.Data)
 		if err != nil {
 			panic(fmt.Errorf("failed to decode hex: %s", test.Data))
@@ -84,15 +100,15 @@ func runTests(tests []*testCase) []*testResult {
 			output, err := roundtrip(testData)
 			if err != nil {
 				results[i] = &testResult{
-					Pass:  false,
+					Pass:  &falseVal,
 					Error: err.Error(),
 				}
 			} else if bytes.Equal(testData, output) {
 				// Encoding matches expected output
-				results[i] = &testResult{Pass: true}
+				results[i] = &testResult{Pass: &trueVal}
 			} else {
 				results[i] = &testResult{
-					Pass:   false,
+					Pass:   &falseVal,
 					Output: hex.EncodeToString(output),
 				}
 			}
@@ -101,12 +117,12 @@ func runTests(tests []*testCase) []*testResult {
 			if failed {
 				// Failed to decode an invalid input, so the test passes
 				results[i] = &testResult{
-					Pass:  true,
+					Pass:  &trueVal,
 					Error: info, // expected error
 				}
 			} else {
 				results[i] = &testResult{
-					Pass: false,
+					Pass: &falseVal,
 				}
 			}
 		case "invalid_out":
@@ -114,12 +130,12 @@ func runTests(tests []*testCase) []*testResult {
 			if failed {
 				// Failed to encode invalid data, so the test passes
 				results[i] = &testResult{
-					Pass:  true,
+					Pass:  &trueVal,
 					Error: info, // expected error
 				}
 			} else {
 				results[i] = &testResult{
-					Pass: false,
+					Pass: &falseVal,
 				}
 			}
 		default:

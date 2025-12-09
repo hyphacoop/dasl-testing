@@ -5,6 +5,11 @@ import * as atcute from "./atcute.js";
 import heliaPkg from "./node_modules/@ipld/dag-cbor/package.json" with { type: "json" };
 import atcutePkg from "./node_modules/@atcute/cbor/package.json" with { type: "json" };
 
+// Test IDs to skip
+const skippedTestIDs = [
+  // Add test IDs here to skip them
+];
+
 let roundtrip, invalidEncode, invalidDecode, link, version;
 if (process.argv[2] === "helia") {
   roundtrip = helia.roundtrip;
@@ -80,6 +85,12 @@ async function runTests(tests) {
   const results = [];
 
   for (const test of tests) {
+    // Check if this test should be skipped based on its ID
+    if (test.id && skippedTestIDs.includes(test.id)) {
+      results.push({ pass: null });
+      continue;
+    }
+
     let testData = Buffer.from(test.data, "hex");
     let failed, info;
 

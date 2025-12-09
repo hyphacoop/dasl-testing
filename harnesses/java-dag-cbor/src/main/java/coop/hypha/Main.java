@@ -12,10 +12,15 @@ import org.peergos.cbor.*;
 import com.authlete.cbor.CBORParser;
 
 public class Main {
-    
+
+    // Test IDs to skip
+    private static final String[] SKIPPED_TEST_IDS = {
+        // Add test IDs here to skip them
+    };
+
     public static class TestResult {
         @JsonProperty("pass")
-        private boolean pass;
+        private Boolean pass;
         
         @JsonProperty("output")
         @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -26,20 +31,20 @@ public class Main {
         private String error;
         
         public TestResult() {}
-        
-        public TestResult(boolean pass) {
+
+        public TestResult(Boolean pass) {
             this.pass = pass;
         }
-        
-        public TestResult(boolean pass, String output, String error) {
+
+        public TestResult(Boolean pass, String output, String error) {
             this.pass = pass;
             this.output = output;
             this.error = error;
         }
-        
+
         // Getters and setters
-        public boolean isPass() { return pass; }
-        public void setPass(boolean pass) { this.pass = pass; }
+        public Boolean isPass() { return pass; }
+        public void setPass(Boolean pass) { this.pass = pass; }
         public String getOutput() { return output; }
         public void setOutput(String output) { this.output = output; }
         public String getError() { return error; }
@@ -50,20 +55,25 @@ public class Main {
     public static class TestCase {
         @JsonProperty("type")
         private String type;
-        
+
         @JsonProperty("data")
         private String data;
-        
+
+        @JsonProperty("id")
+        private String id;
+
         @JsonProperty("tags")
         private List<String> tags;
-        
+
         public TestCase() {}
-        
+
         // Getters and setters
         public String getType() { return type; }
         public void setType(String type) { this.type = type; }
         public String getData() { return data; }
         public void setData(String data) { this.data = data; }
+        public String getId() { return id; }
+        public void setId(String id) { this.id = id; }
         public List<String> getTags() { return tags; }
         public void setTags(List<String> tags) { this.tags = tags; }
     }
@@ -144,15 +154,25 @@ public class Main {
     
     private static List<TestResult> runTests(List<TestCase> tests) {
         List<TestResult> results = new ArrayList<>(tests.size());
-        
-        for (TestCase test : tests) {
+
+        testLoop: for (TestCase test : tests) {
+            // Check if this test should be skipped based on its ID
+            if (test.getId() != null && !test.getId().isEmpty()) {
+                for (String skipID : SKIPPED_TEST_IDS) {
+                    if (test.getId().equals(skipID)) {
+                        results.add(new TestResult(null));
+                        continue testLoop;
+                    }
+                }
+            }
+
             byte[] testData;
             try {
                 testData = HexFormat.of().parseHex(test.getData());
             } catch (Exception e) {
                 throw new RuntimeException("Failed to decode hex: " + test.getData(), e);
             }
-            
+
             switch (test.getType()) {
                 case "roundtrip":
                     try {

@@ -4,6 +4,11 @@ import sys
 from pathlib import Path
 from importlib.metadata import version as pkg_version
 
+# Test IDs to skip
+SKIPPED_TEST_IDS = [
+    # Add test IDs here to skip them
+]
+
 if sys.argv[1] == "dag-cbrrr":
     from dagcbrrr import roundtrip, invalid_decode, invalid_encode
 
@@ -49,6 +54,11 @@ def run_tests(tests):
     results = []
 
     for test in tests:
+        # Check if this test should be skipped based on its ID
+        if test.get("id") and test["id"] in SKIPPED_TEST_IDS:
+            results.append({"pass": None})
+            continue
+
         test_data = bytes.fromhex(test["data"])
 
         if test["type"] == "roundtrip":

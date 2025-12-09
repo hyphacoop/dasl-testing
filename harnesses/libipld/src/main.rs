@@ -7,9 +7,14 @@ use std::io::Cursor;
 
 include!(concat!(env!("OUT_DIR"), "/built.rs"));
 
+// Test IDs to skip
+const SKIPPED_TEST_IDS: &[&str] = &[
+    // Add test IDs here to skip them
+];
+
 #[derive(serde::Serialize, serde::Deserialize)]
 struct TestResult {
-    pass: bool,
+    pass: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     output: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -21,6 +26,7 @@ struct TestCase {
     #[serde(rename = "type")]
     test_type: String,
     data: String,
+    id: Option<String>,
 }
 
 #[derive(serde::Serialize)]
@@ -75,6 +81,18 @@ fn run_tests(tests: Vec<TestCase>) -> Vec<TestResult> {
     let mut results = Vec::with_capacity(tests.len());
 
     for test in tests {
+        // Check if this test should be skipped based on its ID
+        if let Some(ref id) = test.id {
+            if SKIPPED_TEST_IDS.contains(&id.as_str()) {
+                results.push(TestResult {
+                    pass: None,
+                    output: None,
+                    error: None,
+                });
+                continue;
+            }
+        }
+
         let test_data = match hex::decode(&test.data) {
             Ok(data) => data,
             Err(_) => panic!("failed to decode hex: {}", test.data),
@@ -85,20 +103,20 @@ fn run_tests(tests: Vec<TestCase>) -> Vec<TestResult> {
                 Ok(output) => {
                     if test_data == output {
                         TestResult {
-                            pass: true,
+                            pass: Some(true),
                             output: None,
                             error: None,
                         }
                     } else {
                         TestResult {
-                            pass: false,
+                            pass: Some(false),
                             output: Some(hex::encode(output)),
                             error: None,
                         }
                     }
                 }
                 Err(err) => TestResult {
-                    pass: false,
+                    pass: Some(false),
                     output: None,
                     error: Some(err),
                 },
@@ -107,13 +125,13 @@ fn run_tests(tests: Vec<TestCase>) -> Vec<TestResult> {
                 let (failed, info) = invalid_decode(&test_data);
                 if failed {
                     TestResult {
-                        pass: true,
+                        pass: Some(true),
                         output: None,
                         error: Some(info),
                     }
                 } else {
                     TestResult {
-                        pass: false,
+                        pass: Some(false),
                         output: None,
                         error: None,
                     }
@@ -123,13 +141,13 @@ fn run_tests(tests: Vec<TestCase>) -> Vec<TestResult> {
                 let (failed, info) = invalid_encode(&test_data);
                 if failed {
                     TestResult {
-                        pass: true,
+                        pass: Some(true),
                         output: None,
                         error: Some(info),
                     }
                 } else {
                     TestResult {
-                        pass: false,
+                        pass: Some(false),
                         output: None,
                         error: None,
                     }
