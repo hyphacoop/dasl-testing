@@ -8,7 +8,7 @@ use std::io::Cursor;
 include!(concat!(env!("OUT_DIR"), "/built.rs"));
 
 // Test IDs to skip
-const SKIPPED_TEST_IDS: &[&str] = &["undefined_invalid_out"];
+const SKIPPED_TEST_IDS: &[&str] = &["undefined_invalid_out", "unassigned_invalid_out"];
 
 #[derive(serde::Serialize, serde::Deserialize)]
 struct TestResult {

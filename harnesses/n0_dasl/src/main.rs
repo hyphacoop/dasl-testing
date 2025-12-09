@@ -13,6 +13,7 @@ const SKIPPED_TEST_IDS: &[&str] = &[
     "datetime_invalid_out",
     "bignum_invalid_out",
     "undefined_invalid_out",
+    "unassigned_invalid_out",
 ];
 
 #[derive(Serialize, Deserialize)]

@@ -22,6 +22,14 @@
     "desc": "this simple value is unassigned by the spec and must be invalid"
   },
   {
+    "type": "invalid_out",
+    "data": "e0",
+    "name": "unassigned simple value",
+    "tags": ["basic"],
+    "desc": "this simple value is unassigned by the spec and must be invalid",
+    "id": "unassigned_invalid_out"
+  },
+  {
     "type": "roundtrip",
     "data": "f6",
     "name": "simple value 'null'",
