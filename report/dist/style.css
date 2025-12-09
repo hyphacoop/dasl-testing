@@ -10,6 +10,10 @@ td.pass {
 td.fail {
   background-color: var(--pico-color-red-500);
 }
+td.skip {
+  background-color: var(--pico-color-yellow-150);
+  color: #373c44;
+}
 .test-group td,
 .test-group th {
   border: 2px solid var(--pico-table-border-color);

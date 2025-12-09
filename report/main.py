@@ -13,10 +13,12 @@ libs = []  # {name, link, version}
 tests_by_file = []  # {name: "file", "results": [TestResult, TestResult, ...], ...}
 tests_by_tag = []  # {name: "tag", "results": [TestResult, TestResult, ...], ...}
 TestResult = namedtuple(
-    "TestResult", ["type", "data", "name", "tags", "desc", "bools", "details", "file"]
+    "TestResult",
+    ["type", "data", "name", "tags", "desc", "bools", "details", "file", "id"],
+    defaults=("",),
 )
 summary = {
-    "Basic": {},  # {"lib name": {"pass": 23, "fail": 5}}
+    "Basic": {},  # {"lib name": {"pass": 23, "fail": 5, "skip": 2}}
     "dag-cbor": {},
 }
 
@@ -107,20 +109,24 @@ for test_file in results[libs[0]["name"]]["files"].keys():
 
 # Gather summary information
 for lib in libs:
-    summary["Basic"][lib["name"]] = {"pass": 0, "fail": 0}
-    summary["dag-cbor"][lib["name"]] = {"pass": 0, "fail": 0}
+    summary["Basic"][lib["name"]] = {"pass": 0, "fail": 0, "skip": 0}
+    summary["dag-cbor"][lib["name"]] = {"pass": 0, "fail": 0, "skip": 0}
 for item in tests_by_file:
     for result in item["results"]:
         tags = result.tags.split(" ")
         if "basic" in tags:
             for i, b in enumerate(result.bools):
-                if b:
+                if b is None:
+                    summary["Basic"][libs[i]["name"]]["skip"] += 1
+                elif b:
                     summary["Basic"][libs[i]["name"]]["pass"] += 1
                 else:
                     summary["Basic"][libs[i]["name"]]["fail"] += 1
         if "dag-cbor" in tags:
             for i, b in enumerate(result.bools):
-                if b:
+                if b is None:
+                    summary["dag-cbor"][libs[i]["name"]]["skip"] += 1
+                elif b:
                     summary["dag-cbor"][libs[i]["name"]]["pass"] += 1
                 else:
                     summary["dag-cbor"][libs[i]["name"]]["fail"] += 1

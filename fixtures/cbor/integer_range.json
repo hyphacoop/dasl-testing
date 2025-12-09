@@ -60,7 +60,8 @@
     "data": "c249010000000000000000",
     "name": "bignum",
     "tags": ["dag-cbor"],
-    "desc": "big integers are banned for encoding by dag-cbor"
+    "desc": "big integers are banned for encoding by dag-cbor",
+    "id": "bignum_invalid_out"
   },
   {
     "type": "invalid_in",

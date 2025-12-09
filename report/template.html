@@ -71,6 +71,7 @@
             data-lib="{{lib}}"
             data-pass="{{passfail.pass}}"
             data-fail="{{passfail.fail}}"
+            data-skip="{{passfail.skip}}"
           ></div>
           {% endfor %}
         </div>
@@ -82,6 +83,7 @@
             data-lib="{{lib}}"
             data-pass="{{passfail.pass}}"
             data-fail="{{passfail.fail}}"
+            data-skip="{{passfail.skip}}"
           ></div>
           {% endfor %}
         </div>
@@ -178,7 +180,14 @@
                     </details>
                   </td>
                   <td>{{result.type}}</td>
-                  {% for cell in result.bools %} {% if cell %}
+                  {% for cell in result.bools %} {% if cell is none %}
+                  <!-- prettier-ignore -->
+                  <td
+                    class="skip clickable-cell"
+                  >
+                    SKIP
+                  </td>
+                  {% elif cell %}
                   <!-- prettier-ignore -->
                   <td
                     onclick='showModal({{ result.details[loop.index0] | tojson }})'

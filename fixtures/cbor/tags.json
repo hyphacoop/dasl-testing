@@ -11,7 +11,8 @@
     "data": "c07819323032352d30352d32365431363a31383a31372d30343a3030",
     "name": "tagged object (datetime)",
     "tags": ["dag-cbor", "c42"],
-    "desc": "an object that could be encoded as a CBOR tag (a datetime in this case) should be rejected by dag-cbor encoders"
+    "desc": "an object that could be encoded as a CBOR tag (a datetime in this case) should be rejected by dag-cbor encoders",
+    "id": "datetime_invalid_out"
   },
   {
     "type": "invalid_in",

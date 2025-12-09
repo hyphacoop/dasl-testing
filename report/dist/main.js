@@ -161,8 +161,9 @@ function displayCharts() {
           data: [
             { value: Number(chart.dataset.pass), name: "Pass" },
             { value: Number(chart.dataset.fail), name: "Fail" },
+            { value: Number(chart.dataset.skip), name: "Skip" },
           ],
-          color: ["#398712", "#D93526"],
+          color: ["#398712", "#D93526", "#E8D600"],
         },
       ],
     };
