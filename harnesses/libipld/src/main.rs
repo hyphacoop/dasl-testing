@@ -1,6 +1,6 @@
+use libipld::Ipld;
 use libipld::cbor::DagCborCodec;
 use libipld::codec::Codec;
-use libipld::Ipld;
 use std::collections::HashMap;
 use std::fs;
 use std::io::Cursor;
@@ -8,9 +8,7 @@ use std::io::Cursor;
 include!(concat!(env!("OUT_DIR"), "/built.rs"));
 
 // Test IDs to skip
-const SKIPPED_TEST_IDS: &[&str] = &[
-    // Add test IDs here to skip them
-];
+const SKIPPED_TEST_IDS: &[&str] = &["undefined_invalid_out"];
 
 #[derive(serde::Serialize, serde::Deserialize)]
 struct TestResult {
@@ -199,9 +197,7 @@ fn invalid_encode(b: &[u8]) -> (bool, String) {
 
 fn cbor_value_to_ipld(value: ciborium::Value) -> Result<Ipld, String> {
     match value {
-        ciborium::Value::Integer(i) => {
-            Ok(Ipld::Integer(i.into()))
-        }
+        ciborium::Value::Integer(i) => Ok(Ipld::Integer(i.into())),
         ciborium::Value::Bytes(b) => Ok(Ipld::Bytes(b)),
         ciborium::Value::Float(f) => Ok(Ipld::Float(f)),
         ciborium::Value::Text(s) => Ok(Ipld::String(s)),

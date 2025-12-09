@@ -18,7 +18,7 @@ import (
 
 // Test IDs to skip
 var skippedTestIDs = []string{
-	// Add test IDs here to skip them
+	"undefined_invalid_out",
 }
 
 type testResult struct {

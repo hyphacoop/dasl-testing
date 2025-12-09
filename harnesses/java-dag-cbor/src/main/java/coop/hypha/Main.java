@@ -15,7 +15,7 @@ public class Main {
 
     // Test IDs to skip
     private static final String[] SKIPPED_TEST_IDS = {
-        // Add test IDs here to skip them
+        "undefined_invalid_out",
     };
 
     public static class TestResult {

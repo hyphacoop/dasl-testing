@@ -11,7 +11,8 @@
     "data": "f7",
     "name": "simple value 'undefined'",
     "tags": ["dag-cbor", "c42", "dCBOR"],
-    "desc": "the CBOR value undefined is banned for encoding by some specs"
+    "desc": "the CBOR value undefined is banned for encoding by some specs",
+    "id": "undefined_invalid_out"
   },
   {
     "type": "invalid_in",

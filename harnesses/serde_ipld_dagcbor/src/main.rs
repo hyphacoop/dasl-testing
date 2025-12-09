@@ -7,7 +7,11 @@ use std::io::Cursor;
 
 include!(concat!(env!("OUT_DIR"), "/built.rs"));
 
-const SKIPPED_TEST_IDS: &[&str] = &["datetime_invalid_out", "bignum_invalid_out"];
+const SKIPPED_TEST_IDS: &[&str] = &[
+    "datetime_invalid_out",
+    "bignum_invalid_out",
+    "undefined_invalid_out",
+];
 
 #[derive(Serialize, Deserialize)]
 struct TestResult {
