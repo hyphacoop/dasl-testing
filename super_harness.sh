@@ -30,6 +30,9 @@ cd ../java-dag-cbor
 mvn compile -q
 java=$(mvn exec:java -Dexec.mainClass="coop.hypha.Main" -q)
 
+cd ../swift
+swift=$(swift run -q)
+
 jq -n \
   --argjson godasl "$godasl" \
   --argjson boxo "$boxo" \
@@ -42,6 +45,7 @@ jq -n \
   --argjson n0_dasl "$n0_dasl" \
   --argjson serde_ipld_dagcbor "$serde_ipld_dagcbor" \
   --argjson java "$java" \
+  --argjson swift "$swift" \
   '{
     "go-dasl": $godasl,
     "go-ipld-prime": $boxo,
@@ -53,5 +57,6 @@ jq -n \
     "n0_dasl": $n0_dasl,
     "serde_ipld_dagcbor": $serde_ipld_dagcbor,
     "libipld": $libipld,
-    "java-dag-cbor": $java
+    "java-dag-cbor": $java,
+    "swift": $swift
   }'
