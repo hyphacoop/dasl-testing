@@ -20,9 +20,9 @@ wheels = [
 
 [[package]]
 name = "cbrrr"
-version = "1.0.1"
+version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a3/2e/321b68b2b12c99864f0872feb8ce80f03483b59c113730f7cb4465a49e0e/cbrrr-1.0.1.tar.gz", hash = "sha256:2dc5f78a71b67849e1b364053819053f03cd2032797ce6adbe1d02e8d602698c", size = 17503, upload-time = "2024-11-16T22:59:41.164Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8f/e9/ccc7a90618e5d67da4bd7b98d9602d1ff791ee65792918659d161bac93a5/cbrrr-1.1.0.tar.gz", hash = "sha256:673e5bc27d213a549946886c22a4de8bbc5a091ebb8f0dee4317694a655f23f5", size = 18364, upload-time = "2026-03-28T22:56:15.309Z" }
 
 [[package]]
 name = "dasl-testing"
