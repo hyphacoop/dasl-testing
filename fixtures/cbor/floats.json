@@ -10,14 +10,14 @@
     "type": "roundtrip",
     "data": "fb3ff8000000000000",
     "name": "64-bit floats only",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "a 64-bit float, the only valid float representation for dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "f93e00",
     "name": "64-bit floats only",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "a 16-bit float, an invalid input for dag-cbor"
   },
   {
@@ -38,21 +38,21 @@
     "type": "invalid_in",
     "data": "fb7ff8000000000000",
     "name": "long NaN",
-    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "tags": ["rfc8949", "dag-cbor"],
     "desc": "an invalid NaN representation, too long (RFC 8949) or because NaNs are invalid (dag-cbor)"
   },
   {
     "type": "roundtrip",
     "data": "fb8000000000000000",
     "name": "negative zero float64",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "testing that negative zero can be roundtripped without becoming positive or an integer"
   },
   {
     "type": "roundtrip",
     "data": "fb0000000000000000",
     "name": "zero float64",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "a standard float like 0.0 shouldn't become an integer"
   },
   {
@@ -73,70 +73,70 @@
     "type": "invalid_in",
     "data": "f97e00",
     "name": "short NaN",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "even short representations of NaN are invalid for dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "f97c00",
     "name": "short Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "fa7f800000",
     "name": "32-bit Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "fb7ff0000000000000",
     "name": "64-bit Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "f9fc00",
     "name": "short -Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "negative infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "faff800000",
     "name": "32-bit -Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "negative infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_in",
     "data": "fbfff0000000000000",
     "name": "64-bit -Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "negative infinity is invalid in dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "f97e00",
     "name": "NaN",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "NaN should not be encoded for dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "f97c00",
     "name": "Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "infinity should not be encoded for dag-cbor"
   },
   {
     "type": "invalid_out",
     "data": "f9fc00",
     "name": "-Inf",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "negative infinity should not be encoded for dag-cbor"
   },
   {
@@ -150,7 +150,7 @@
     "type": "invalid_in",
     "data": "f97d00",
     "name": "signaling NaN",
-    "tags": ["dag-cbor", "c42"],
+    "tags": ["dag-cbor"],
     "desc": "signaling NaNs are invalid in dag-cbor (like other NaNs)"
   }
 ]

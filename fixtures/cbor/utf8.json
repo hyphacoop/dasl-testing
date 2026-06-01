@@ -31,7 +31,7 @@
     "type": "roundtrip",
     "data": "6365cc81",
     "name": "text not in Unicode Normalization Form C",
-    "tags": ["dag-cbor", "CDE", "CBOR-Core", "c42"],
+    "tags": ["dag-cbor", "CDE", "CBOR-Core"],
     "desc": "all specs except dCBOR don't mention Unicode normalization, so this test ensures that libraries don't alter strings for the purpose of normalization"
   }
 ]
