@@ -133,6 +133,11 @@ for item in tests_by_file:
 
 with open("dist/index.html", "w") as f:
     date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    # Filter out all non DASL related tests
+    tests_by_tag = [
+        test for test in tests_by_tag
+        if test["name"] in ["basic", "dag-cbor", "dasl-cid"]
+    ]
     f.write(
         template.render(
             libs=libs,
