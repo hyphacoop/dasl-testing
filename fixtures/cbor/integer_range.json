@@ -45,14 +45,14 @@
     "type": "roundtrip",
     "data": "c249010000000000000000",
     "name": "smallest unsigned bigint",
-    "tags": ["CBOR-Core", "c42"],
+    "tags": ["CBOR-Core"],
     "desc": "the smallest positive CBOR big integer value, valid in specs that support big integers"
   },
   {
     "type": "roundtrip",
     "data": "c349010000000000000000",
     "name": "highest negative bigint",
-    "tags": ["CBOR-Core", "c42"],
+    "tags": ["CBOR-Core"],
     "desc": "the largest negative CBOR big integer value, valid in specs that support big integers"
   },
   {

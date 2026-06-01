@@ -10,7 +10,7 @@
     "type": "roundtrip",
     "data": "d82a582500015512205891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
     "name": "valid CID with short tag",
-    "tags": ["dag-cbor", "dasl-cid", "c42"],
+    "tags": ["dag-cbor", "dasl-cid"],
     "desc": "a valid CID (raw, SHA-256) using the correct short CBOR representation of the CID tag"
   },
   {

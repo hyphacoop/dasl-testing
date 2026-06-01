@@ -3,28 +3,28 @@
     "type": "invalid_in",
     "data": "bfff",
     "name": "indefinite map",
-    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "tags": ["rfc8949", "dag-cbor"],
     "desc": "maps with undefined length are banned"
   },
   {
     "type": "invalid_in",
     "data": "9fff",
     "name": "indefinite array",
-    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "tags": ["rfc8949", "dag-cbor"],
     "desc": "arrays with undefined length are banned"
   },
   {
     "type": "invalid_in",
     "data": "5fff",
     "name": "indefinite byte string",
-    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "tags": ["rfc8949", "dag-cbor"],
     "desc": "byte strings with undefined length are banned"
   },
   {
     "type": "invalid_in",
     "data": "7fff",
     "name": "indefinite string",
-    "tags": ["rfc8949", "dag-cbor", "c42"],
+    "tags": ["rfc8949", "dag-cbor"],
     "desc": "strings with undefined length are banned"
   }
 ]
