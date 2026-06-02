@@ -148,13 +148,7 @@ func runTests(tests []*testCase) []*testResult {
 func roundtrip(b []byte) ([]byte, error) {
 	// Decode using library to test decoding ability
 	var v any
-	dec, err := drisl.DecOptions{
-		MaxNestedLevels: 3001, // For nested test
-	}.DecMode()
-	if err != nil {
-		panic(err)
-	}
-	if err := dec.Unmarshal(b, &v); err != nil {
+	if err := drisl.Unmarshal(b, &v); err != nil {
 		return nil, err
 	}
 	// Re-encode and return to check nothing changed
