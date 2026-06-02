@@ -12,8 +12,9 @@ Run the test suite locally by running `./run.sh` after installing all the depend
 - [uv](https://docs.astral.sh/uv/) for Python
 - Rust (and `cargo`)
 - Java 21 (LTS) and Maven
+- [Swift](https://www.swift.org/install/) >= 6.0
 
-Make sure to run `npm install` in `harnesses/js/` before starting.
+Make sure to run `./update_libs.sh` before starting.
 
 ## Contributing
 
