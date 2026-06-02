@@ -2,33 +2,60 @@
 
 set -euo pipefail
 
+# run.sh invokes us as `super_harness.sh > results.json`, so everything we
+# write to stdout ends up in the results file. Each harness's JSON output is
+# captured into a variable below, and only the final `jq` result is meant to
+# reach stdout. The catch: a failing harness may print its error to stdout
+# (Maven logs errors there, not stderr), which would silently land in
+# results.json and never show up in CI.
+#
+# `run` guards against that. It captures the harness's stdout, lets stderr flow
+# straight to CI, and on failure prints a clearly labelled error — including the
+# captured stdout where Maven hides its errors — to stderr before aborting.
+run() {
+  local name="$1"
+  shift
+  local out rc=0
+  out=$("$@") || rc=$?
+  if [ "$rc" -ne 0 ]; then
+    {
+      echo "::error::harness '$name' failed (exit $rc) running: $*"
+      echo "----- captured stdout from '$name' -----"
+      printf '%s\n' "$out"
+      echo "-----------------------------------------"
+    } >&2
+    exit "$rc"
+  fi
+  printf '%s' "$out"
+}
+
 cd harnesses/boxo
-boxo=$(go run ./main.go)
+boxo=$(run go-ipld-prime go run ./main.go)
 cd ../go-ipld-cbor
-goipld=$(go run ./main.go)
+goipld=$(run go-ipld-cbor go run ./main.go)
 cd ../go-dasl
-godasl=$(go run ./main.go)
+godasl=$(run go-dasl go run ./main.go)
 
 cd ../js
-helia=$(node main.js helia)
-atcute=$(node main.js atcute)
+helia=$(run js-dag-cbor node main.js helia)
+atcute=$(run atcute node main.js atcute)
 
 cd ../python
-cbrrr=$(uv run main.py dag-cbrrr)
-pylibipld=$(uv run main.py libipld)
+cbrrr=$(run dag-cbrrr uv run main.py dag-cbrrr)
+pylibipld=$(run python-libipld uv run main.py libipld)
 
 cd ../serde_ipld_dagcbor
-serde_ipld_dagcbor=$(cargo run -q)
+serde_ipld_dagcbor=$(run serde_ipld_dagcbor cargo run -q)
 
 cd ../n0_dasl
-n0_dasl=$(cargo run -q)
+n0_dasl=$(run n0_dasl cargo run -q)
 
 cd ../libipld
-libipld=$(cargo run -q)
+libipld=$(run libipld cargo run -q)
 
 cd ../java-dag-cbor
-mvn compile -q
-java=$(mvn exec:java -Dexec.mainClass="coop.hypha.Main" -q)
+run java-dag-cbor-compile mvn compile -q >/dev/null
+java=$(run java-dag-cbor mvn exec:java -Dexec.mainClass="coop.hypha.Main" -q)
 
 jq -n \
   --argjson godasl "$godasl" \
