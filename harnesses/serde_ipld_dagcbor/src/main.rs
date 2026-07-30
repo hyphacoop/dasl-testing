@@ -8,10 +8,16 @@ use std::io::Cursor;
 include!(concat!(env!("OUT_DIR"), "/built.rs"));
 
 const SKIPPED_TEST_IDS: &[&str] = &[
+    // ciborium decodes into a custom map, hence it can be encoded by serde_ipld_dagcbor.
     "datetime_invalid_out",
+    // ciborium decodes into a custom map, hence it can be encoded by serde_ipld_dagcbor.
     "bignum_invalid_out",
+    // ciborium converts it into a `null`, hence serder_ipld_dagcbor can encode it.
     "undefined_invalid_out",
+    // ciborium cannot decode this value, hence the test would fail early.
     "unassigned_invalid_out",
+    // serde_ipld_dagcbor does not error, but encodes as the equal `0.0` instead.
+    "negative_zero_invalid_out",
 ];
 
 #[derive(Serialize, Deserialize)]

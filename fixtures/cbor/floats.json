@@ -42,11 +42,12 @@
     "desc": "an invalid NaN representation, too long (RFC 8949) or because NaNs are invalid (dag-cbor)"
   },
   {
-    "type": "roundtrip",
+    "type": "invalid_in",
     "data": "fb8000000000000000",
     "name": "negative zero float64",
     "tags": ["dag-cbor"],
-    "desc": "testing that negative zero can be roundtripped without becoming positive or an integer"
+    "desc": "negative zero is invalid in dag-cbor",
+    "id": "negative_zero_invalid_in"
   },
   {
     "type": "roundtrip",
@@ -138,6 +139,14 @@
     "name": "-Inf",
     "tags": ["dag-cbor"],
     "desc": "negative infinity should not be encoded for dag-cbor"
+  },
+  {
+    "type": "invalid_out",
+    "data": "fb8000000000000000",
+    "name": "negative zero",
+    "tags": ["dag-cbor"],
+    "desc": "negative zero should not be encoded for dag-cbor",
+    "id": "negative_zero_invalid_out"
   },
   {
     "type": "invalid_in",
