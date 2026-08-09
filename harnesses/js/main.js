@@ -7,7 +7,9 @@ import atcutePkg from "./node_modules/@atcute/cbor/package.json" with { type: "j
 
 // Test IDs to skip
 const skippedTestIDs = [
-  // Add test IDs here to skip them
+  // Both @ipld/dag-cbor and @atcute/cbor don't error, but encode -0.0 as the
+  // equal integer 0 instead, so there are no forbidden bytes to reject.
+  "negative_zero_invalid_out",
 ];
 
 let roundtrip, invalidEncode, invalidDecode, link, version;
