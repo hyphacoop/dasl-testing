@@ -35,3 +35,7 @@ cd ../java-dag-cbor
 latest_tag=$(curl -s "https://api.github.com/repos/peergos/dag-cbor/tags" | jq -r '.[0].name')
 mvn versions:use-latest-versions -DgenerateBackupPoms=false
 mvn versions:use-dep-version -Dincludes="com.github.peergos:dag-cbor" -DdepVersion="$latest_tag" -DforceVersion=true -DgenerateBackupPoms=false
+
+cd ../swift
+swift package clean
+swift package update
