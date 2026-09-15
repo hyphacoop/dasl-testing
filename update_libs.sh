@@ -22,13 +22,16 @@ cd ../python
 uv lock -U
 
 cd ../serde_ipld_dagcbor
-cargo update serde_ipld_dagcbor
+latest_version=$(curl -s -A "Update script (https://github.com/hyphacoop/dasl-testing)" https://crates.io/api/v1/crates/serde_ipld_dagcbor | jq -r .crate.max_stable_version)
+cargo add serde_ipld_dagcbor@$latest_version
 
 cd ../n0_dasl
-cargo update dasl
+latest_version=$(curl -s -A "Update script (https://github.com/hyphacoop/dasl-testing)" https://crates.io/api/v1/crates/dasl | jq -r .crate.max_stable_version)
+cargo add dasl@$latest_version
 
 cd ../libipld
-cargo update libipld
+latest_version=$(curl -s -A "Update script (https://github.com/hyphacoop/dasl-testing)" https://crates.io/api/v1/crates/libipld | jq -r .crate.max_stable_version)
+cargo update libipld@$latest_version
 
 cd ../java-dag-cbor
 # Manually use latest tag
